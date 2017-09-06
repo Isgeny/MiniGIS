@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace MiniGIS
 {
-    public class PolyLine
+    public class PolyLine : MapObject
     {
         public List<GEOPoint> Nodes { get; set; }
 
         public PolyLine()
         {
             Nodes = new List<GEOPoint>();
+            Type = MapObjectType.PolyLine;
         }
 
         public PolyLine(List<GEOPoint> nodes)
@@ -24,11 +25,17 @@ namespace MiniGIS
                 var point = new GEOPoint(node.X, node.Y);
                 Nodes.Add(point);
             }
+            Type = MapObjectType.PolyLine;
         }
 
         public void AddNode(GEOPoint point)
         {
             Nodes.Add(point);
+        }
+
+        public void InsertNode(int index, GEOPoint point)
+        {
+            Nodes.Insert(index, point);
         }
 
         public void RemoveNode(GEOPoint point)

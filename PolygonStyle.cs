@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace MiniGIS
 {
-    public class Polygon : PolyLine
+    public class PolygonStyle
     {
-        public Polygon() : base()
-        {
-            Type = MapObjectType.Polygon;
-        }
+        public Color SymbolColor { get; set; }
     }
 }

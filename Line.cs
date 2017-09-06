@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MiniGIS
 {
-    public class Line
+    public class Line : MapObject
     {
         public GEOPoint BeginPoint { get; set; }
         public GEOPoint EndPoint { get; set; }
@@ -15,6 +15,7 @@ namespace MiniGIS
         {
             BeginPoint = new GEOPoint();
             EndPoint = new GEOPoint();
+            Type = MapObjectType.Line;
         }
     }
 }
