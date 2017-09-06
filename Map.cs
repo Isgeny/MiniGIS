@@ -16,6 +16,8 @@ namespace MiniGIS
         {
             InitializeComponent();
 
+            Layers = new List<Layer>();
+            MapScale = 1.0;
             MapCenter = new GEOPoint();
         }
 
@@ -28,14 +30,20 @@ namespace MiniGIS
             
         }
 
-        public System.Drawing.Point MapToScreen(GEOPoint point)
+        public System.Drawing.Point MapToScreen(GEOPoint mapPoint)
         {
-            return new System.Drawing.Point();
+            var screenPoint = new System.Drawing.Point();
+            screenPoint.X = this.Width / 2 + Convert.ToInt32(mapPoint.X);
+            screenPoint.Y = this.Height / 2 - Convert.ToInt32(mapPoint.Y);
+            return screenPoint;
         }
 
-        public GEOPoint ScreenToMap(System.Drawing.Point point)
+        public GEOPoint ScreenToMap(System.Drawing.Point screenPoint)
         {
-            return new GEOPoint();
+            var mapPoint = new GEOPoint();
+            mapPoint.X = screenPoint.X - this.Width / 2;
+            mapPoint.Y = this.Height / 2 - screenPoint.Y;
+            return mapPoint;
         }
     }
 }
