@@ -11,6 +11,13 @@ namespace MiniGIS
     {
         public int Width { get; set; }
         public string Type { get; set; }
-        public Color SymbolColor { get; set; }
+        public Color Color { get; set; }
+
+        public LineStyle()
+        {
+            Width = 5;
+            Type = "";
+            Color = Color.Black;
+        }
     }
 }

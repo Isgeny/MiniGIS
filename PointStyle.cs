@@ -11,12 +11,23 @@ namespace MiniGIS
     {
         public string FontFamily { get; set; }
         public char Symbol { get; set; }
-        public int FontSize { get; set; }
+        public int SymbolSize { get; set; }
         public Color SymbolColor { get; set; }
 
         public PointStyle()
         {
             FontFamily = "Wingdings";
+            Symbol = '0';
+            SymbolSize = 5;
+            SymbolColor = Color.Black;
+        }
+
+        public PointStyle(string font, char symbol, int symbolSize, Color symbolColor)
+        {
+            FontFamily = font;
+            Symbol = symbol;
+            SymbolSize = symbolSize;
+            SymbolColor = symbolColor;
         }
     }
 }

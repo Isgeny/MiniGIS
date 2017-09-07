@@ -9,6 +9,6 @@ namespace MiniGIS
 {
     public class PolygonStyle
     {
-        public Color SymbolColor { get; set; }
+        public Color Color { get; set; }
     }
 }
