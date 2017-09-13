@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MiniGIS
 {
@@ -18,6 +19,11 @@ namespace MiniGIS
             EndPoint = new GEOPoint();
             Type = MapObjectType.Line;
             Style = new LineStyle();
+        }
+
+        public override void Draw(PaintEventArgs e)
+        {
+            
         }
     }
 }

@@ -38,13 +38,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mapControl.Layers = null;
-            this.mapControl.Location = new System.Drawing.Point(12, 12);
+            this.mapControl.Location = new System.Drawing.Point(225, 265);
             geoPoint1.X = 0D;
             geoPoint1.Y = 0D;
             this.mapControl.MapCenter = geoPoint1;
             this.mapControl.MapScale = 0D;
             this.mapControl.Name = "mapControl";
-            this.mapControl.Size = new System.Drawing.Size(758, 726);
+            this.mapControl.Size = new System.Drawing.Size(545, 476);
             this.mapControl.TabIndex = 0;
             // 
             // Form

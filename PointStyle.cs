@@ -10,19 +10,19 @@ namespace MiniGIS
     public class PointStyle
     {
         public string FontFamily { get; set; }
-        public char Symbol { get; set; }
+        public byte Symbol { get; set; }
         public int SymbolSize { get; set; }
         public Color SymbolColor { get; set; }
 
         public PointStyle()
         {
             FontFamily = "Wingdings";
-            Symbol = '0';
+            Symbol = 0x40;
             SymbolSize = 5;
             SymbolColor = Color.Black;
         }
 
-        public PointStyle(string font, char symbol, int symbolSize, Color symbolColor)
+        public PointStyle(string font, byte symbol, int symbolSize, Color symbolColor)
         {
             FontFamily = font;
             Symbol = symbol;

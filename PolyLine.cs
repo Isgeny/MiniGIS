@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MiniGIS
 {
@@ -58,6 +59,11 @@ namespace MiniGIS
         public int CountNodes()
         {
             return Nodes.Count;
+        }
+
+        public override void Draw(PaintEventArgs e)
+        {
+            
         }
     }
 }
