@@ -17,5 +17,6 @@ namespace MiniGIS
     public abstract class MapObject
     {
         public MapObjectType Type { get; set; }
+        public Layer Layer {get; set;}
     }
 }

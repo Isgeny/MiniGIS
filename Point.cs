@@ -9,11 +9,13 @@ namespace MiniGIS
     public class Point : MapObject
     {
         public GEOPoint Position { get; set; }
+        public PointStyle Style { get; set; }
 
         public Point()
         {
             Position = new GEOPoint();
             Type = MapObjectType.Point;
+            Style = new PointStyle();
         }
     }
 }

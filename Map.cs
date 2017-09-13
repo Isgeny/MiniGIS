@@ -33,17 +33,38 @@ namespace MiniGIS
         public System.Drawing.Point MapToScreen(GEOPoint mapPoint)
         {
             var screenPoint = new System.Drawing.Point();
-            screenPoint.X = this.Width / 2 + Convert.ToInt32(mapPoint.X) + Convert.ToInt32(MapCenter.X);
-            screenPoint.Y = this.Height / 2 - Convert.ToInt32(mapPoint.Y) + Convert.ToInt32(MapCenter.Y);
+            screenPoint.X = (this.Width / 2 + Convert.ToInt32(mapPoint.X) + Convert.ToInt32(MapCenter.X)) * Convert.ToInt32(MapScale);
+            screenPoint.Y = (this.Height / 2 - Convert.ToInt32(mapPoint.Y) + Convert.ToInt32(MapCenter.Y)) * Convert.ToInt32(MapScale);
             return screenPoint;
         }
 
         public GEOPoint ScreenToMap(System.Drawing.Point screenPoint)
         {
             var mapPoint = new GEOPoint();
-            mapPoint.X = screenPoint.X - this.Width / 2 - MapCenter.X;
-            mapPoint.Y = this.Height / 2 - screenPoint.Y - MapCenter.Y;
+            mapPoint.X = (screenPoint.X - this.Width / 2 - MapCenter.X) * MapScale;
+            mapPoint.Y = (this.Height / 2 - screenPoint.Y - MapCenter.Y) * MapScale;
             return mapPoint;
+        }
+
+        public void AddLayer(Layer layer)
+        {
+            layer.Map = this;
+            Layers.Add(layer);
+        }
+
+        public void InsertLayer(int index, Layer layer)
+        {
+            Layers.Insert(index, layer);
+        }
+
+        public void RemoveLayer(Layer layer)
+        {
+            Layers.Remove(layer);
+        }
+
+        public int CountLayers()
+        {
+            return Layers.Count;
         }
     }
 }

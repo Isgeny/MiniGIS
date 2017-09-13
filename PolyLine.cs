@@ -9,11 +9,13 @@ namespace MiniGIS
     public class PolyLine : MapObject
     {
         public List<GEOPoint> Nodes { get; set; }
+        public LineStyle LineStyle { get; set; }
 
         public PolyLine()
         {
             Nodes = new List<GEOPoint>();
             Type = MapObjectType.PolyLine;
+            LineStyle = new LineStyle();
         }
 
         public PolyLine(List<GEOPoint> nodes)

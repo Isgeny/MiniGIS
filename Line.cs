@@ -10,12 +10,14 @@ namespace MiniGIS
     {
         public GEOPoint BeginPoint { get; set; }
         public GEOPoint EndPoint { get; set; }
+        public LineStyle Style { get; set; }
 
         public Line()
         {
             BeginPoint = new GEOPoint();
             EndPoint = new GEOPoint();
             Type = MapObjectType.Line;
+            Style = new LineStyle();
         }
     }
 }

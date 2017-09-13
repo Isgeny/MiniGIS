@@ -11,6 +11,7 @@ namespace MiniGIS
         public List<MapObject> MapObjects { get; set; }
         public string Name { get; set; }
         public bool Visible { get; set; }
+        public Map Map { get; set; }
 
         public Layer()
         {
@@ -21,6 +22,7 @@ namespace MiniGIS
 
         public void AddMapObject(MapObject mapObject)
         {
+            mapObject.Layer = this;
             MapObjects.Add(mapObject);
         }
 

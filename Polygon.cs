@@ -8,9 +8,12 @@ namespace MiniGIS
 {
     public class Polygon : PolyLine
     {
+        public PolygonStyle PolygonStyle {get; set; }
+
         public Polygon() : base()
         {
             Type = MapObjectType.Polygon;
+            PolygonStyle = new PolygonStyle();
         }
     }
 }
