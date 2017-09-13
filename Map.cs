@@ -34,37 +34,37 @@ namespace MiniGIS
         {
             var screenPoint = new System.Drawing.Point();
             screenPoint.X = (int)((mapPoint.X + MapCenter.X) * MapScale + this.Width / 2 + 0.5);
-            screenPoint.Y = (int)((mapPoint.Y - MapCenter.Y) * MapScale + this.Height / 2 + 0.5);
-           return screenPoint;
-       }
+            screenPoint.Y = (int)(-(mapPoint.Y + MapCenter.Y) * MapScale + this.Height / 2 + 0.5);
+            return screenPoint;
+        }
 
        public GEOPoint ScreenToMap(System.Drawing.Point screenPoint)
        {
             var mapPoint = new GEOPoint();
             mapPoint.X = (screenPoint.X - this.Width / 2) / MapScale - MapCenter.X;
-            mapPoint.Y = (screenPoint.Y - this.Height / 2) / MapScale + MapCenter.X;
+            mapPoint.Y = -(screenPoint.Y - this.Height / 2) / MapScale + MapCenter.Y;
             return mapPoint;
        }
 
        public void AddLayer(Layer layer)
        {
-           layer.Map = this;
-           Layers.Add(layer);
-       }
+            layer.Map = this;
+            Layers.Add(layer);
+        }
 
        public void InsertLayer(int index, Layer layer)
        {
-           Layers.Insert(index, layer);
+            Layers.Insert(index, layer);
        }
 
        public void RemoveLayer(Layer layer)
        {
-           Layers.Remove(layer);
+            Layers.Remove(layer);
        }
 
        public int CountLayers()
        {
-           return Layers.Count;
+            return Layers.Count;
        }
    }
 }
