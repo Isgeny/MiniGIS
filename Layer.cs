@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MiniGIS
 {
@@ -39,6 +40,14 @@ namespace MiniGIS
         public int CountMapObjects()
         {
             return MapObjects.Count;
+        }
+
+        public void Draw(PaintEventArgs e)
+        {
+            foreach(var mapObject in MapObjects)
+            {
+                mapObject.Draw(e);
+            }
         }
     }
 }

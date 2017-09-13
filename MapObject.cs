@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MiniGIS
 {
@@ -17,6 +18,8 @@ namespace MiniGIS
     public abstract class MapObject
     {
         public MapObjectType Type { get; set; }
-        public Layer Layer {get; set;}
+        public Layer Layer {get; set; }
+
+        public abstract void Draw(PaintEventArgs e);
     }
 }

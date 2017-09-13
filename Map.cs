@@ -27,7 +27,13 @@ namespace MiniGIS
 
         private void Map_Paint(object sender, PaintEventArgs e)
         {
-            
+            foreach(var layer in Layers)
+            {
+                if(layer.Visible)
+                {
+                    layer.Draw(e);
+                }
+            }
         }
 
         public System.Drawing.Point MapToScreen(GEOPoint mapPoint)
