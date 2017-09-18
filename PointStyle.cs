@@ -18,7 +18,7 @@ namespace MiniGIS
         {
             FontFamily = "Wingdings";
             Symbol = 0x40;
-            SymbolSize = 5;
+            SymbolSize = 40;
             SymbolColor = Color.Black;
         }
 

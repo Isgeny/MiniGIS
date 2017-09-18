@@ -12,17 +12,17 @@ namespace MiniGIS
 {
     public partial class Map : UserControl
     {
-        public List<Layer> Layers { get; set; }
+        public List<Layer> Layers;
+    
         public double MapScale { get; set; }
         public GEOPoint MapCenter { get; set; }
 
         public Map()
         {
             InitializeComponent();
-
-            Layers = new List<Layer>();
             MapScale = 1.0;
             MapCenter = new GEOPoint();
+            Layers = new List<Layer>();
         }       
 
         private void Map_Paint(object sender, PaintEventArgs e)
