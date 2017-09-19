@@ -9,7 +9,7 @@ namespace MiniGIS
 {
     public class LineStyle
     {
-        public int Width { get; set; }
+        public float Width { get; set; }
         public string Type { get; set; }
         public Color Color { get; set; }
 
