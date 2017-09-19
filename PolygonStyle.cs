@@ -10,5 +10,10 @@ namespace MiniGIS
     public class PolygonStyle
     {
         public Color Color { get; set; }
+
+        public PolygonStyle()
+        {
+            Color = Color.Green;
+        }
     }
 }

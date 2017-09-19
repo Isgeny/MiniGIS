@@ -36,6 +36,13 @@ namespace MiniGIS
             polyLine.AddNode(new GEOPoint(0, 0));
             polyLine.AddNode(new GEOPoint(-50, -50));
             polyLine.AddNode(new GEOPoint(-180, -250));
+            polyLine.AddNode(new GEOPoint(180, 100));
+
+            var polygon = new Polygon();
+            polygon.AddNode(new GEOPoint(45, 75));
+            polygon.AddNode(new GEOPoint(85, -50));
+            polygon.AddNode(new GEOPoint(100, 0));
+            polygon.AddNode(new GEOPoint(-75, 50));
 
             var layer1 = new Layer();
             layer1.AddMapObject(OX);
@@ -43,7 +50,11 @@ namespace MiniGIS
             layer1.AddMapObject(pointX);
             layer1.AddMapObject(pointY);
             layer1.AddMapObject(polyLine);
+            layer1.AddMapObject(polygon);
             mapControl.AddLayer(layer1);
         }
     }
 }
+
+//Select(Выбор), Pan(Ладошка), Zoom In(приближение) Zoom Out(Отдаление), Entire view(Показать целиком) - перечиление
+//При выборе перечисление попадает в поле формы
