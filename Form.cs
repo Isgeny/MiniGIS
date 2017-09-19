@@ -32,13 +32,18 @@ namespace MiniGIS
             pointY.Style = new PointStyle("Arial", Convert.ToByte('Y'), 14, System.Drawing.Color.Black);
             pointY.Position = new GEOPoint(pointX.Style.SymbolSize, this.Height / 2 - 50);
 
+            var polyLine = new PolyLine();
+            polyLine.AddNode(new GEOPoint(0, 0));
+            polyLine.AddNode(new GEOPoint(-50, -50));
+            polyLine.AddNode(new GEOPoint(-180, -250));
+
             var layer1 = new Layer();
             layer1.AddMapObject(OX);
             layer1.AddMapObject(OY);
             layer1.AddMapObject(pointX);
             layer1.AddMapObject(pointY);
+            layer1.AddMapObject(polyLine);
             mapControl.AddLayer(layer1);
-    
         }
     }
 }

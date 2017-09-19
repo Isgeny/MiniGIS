@@ -50,6 +50,7 @@
             this.ClientSize = new System.Drawing.Size(782, 753);
             this.Controls.Add(this.mapControl);
             this.Name = "Form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MiniGIS";
             this.ResumeLayout(false);
 
