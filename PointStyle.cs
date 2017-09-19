@@ -17,7 +17,7 @@ namespace MiniGIS
         public PointStyle()
         {
             FontFamily = "Wingdings";
-            Symbol = 0x40;
+            Symbol = 0x38;
             SymbolSize = 40;
             SymbolColor = Color.Black;
         }

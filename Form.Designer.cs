@@ -34,13 +34,13 @@
             // 
             // mapControl
             // 
-            this.mapControl.Location = new System.Drawing.Point(60, 53);
+            this.mapControl.Location = new System.Drawing.Point(12, 12);
             geoPoint1.X = 0D;
             geoPoint1.Y = 0D;
             this.mapControl.MapCenter = geoPoint1;
             this.mapControl.MapScale = 1D;
             this.mapControl.Name = "mapControl";
-            this.mapControl.Size = new System.Drawing.Size(652, 607);
+            this.mapControl.Size = new System.Drawing.Size(758, 729);
             this.mapControl.TabIndex = 0;
             // 
             // Form

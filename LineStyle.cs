@@ -15,7 +15,7 @@ namespace MiniGIS
 
         public LineStyle()
         {
-            Width = 5;
+            Width = 1;
             Type = "";
             Color = Color.Black;
         }
