@@ -29,27 +29,15 @@
         private void InitializeComponent()
         {
             MiniGIS.GEOPoint geoPoint1 = new MiniGIS.GEOPoint();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
-            this.mapControl = new MiniGIS.Map();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.selectBtn = new System.Windows.Forms.ToolStripButton();
             this.panBtn = new System.Windows.Forms.ToolStripButton();
             this.zoomInBtn = new System.Windows.Forms.ToolStripButton();
             this.zoomOutBtn = new System.Windows.Forms.ToolStripButton();
             this.entireViewBtn = new System.Windows.Forms.ToolStripButton();
+            this.mapControl = new MiniGIS.Map();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mapControl
-            // 
-            this.mapControl.Location = new System.Drawing.Point(12, 12);
-            geoPoint1.X = 0D;
-            geoPoint1.Y = 0D;
-            this.mapControl.MapCenter = geoPoint1;
-            this.mapControl.MapScale = 1D;
-            this.mapControl.Name = "mapControl";
-            this.mapControl.Size = new System.Drawing.Size(758, 729);
-            this.mapControl.TabIndex = 0;
             // 
             // toolStrip
             // 
@@ -69,7 +57,7 @@
             // selectBtn
             // 
             this.selectBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.selectBtn.Image = ((System.Drawing.Image)(resources.GetObject("selectBtn.Image")));
+            this.selectBtn.Image = global::MiniGIS.Properties.Resources.Select;
             this.selectBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.selectBtn.Name = "selectBtn";
             this.selectBtn.Size = new System.Drawing.Size(24, 24);
@@ -78,7 +66,7 @@
             // panBtn
             // 
             this.panBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.panBtn.Image = ((System.Drawing.Image)(resources.GetObject("panBtn.Image")));
+            this.panBtn.Image = global::MiniGIS.Properties.Resources.Pan;
             this.panBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.panBtn.Name = "panBtn";
             this.panBtn.Size = new System.Drawing.Size(24, 24);
@@ -87,7 +75,7 @@
             // zoomInBtn
             // 
             this.zoomInBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.zoomInBtn.Image = ((System.Drawing.Image)(resources.GetObject("zoomInBtn.Image")));
+            this.zoomInBtn.Image = global::MiniGIS.Properties.Resources.ZoomIn;
             this.zoomInBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.zoomInBtn.Name = "zoomInBtn";
             this.zoomInBtn.Size = new System.Drawing.Size(24, 24);
@@ -96,7 +84,7 @@
             // zoomOutBtn
             // 
             this.zoomOutBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.zoomOutBtn.Image = ((System.Drawing.Image)(resources.GetObject("zoomOutBtn.Image")));
+            this.zoomOutBtn.Image = global::MiniGIS.Properties.Resources.ZoomOut;
             this.zoomOutBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.zoomOutBtn.Name = "zoomOutBtn";
             this.zoomOutBtn.Size = new System.Drawing.Size(24, 24);
@@ -105,11 +93,22 @@
             // entireViewBtn
             // 
             this.entireViewBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.entireViewBtn.Image = ((System.Drawing.Image)(resources.GetObject("entireViewBtn.Image")));
+            this.entireViewBtn.Image = global::MiniGIS.Properties.Resources.EntireView;
             this.entireViewBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.entireViewBtn.Name = "entireViewBtn";
             this.entireViewBtn.Size = new System.Drawing.Size(24, 24);
             this.entireViewBtn.Text = "Entire View";
+            // 
+            // mapControl
+            // 
+            this.mapControl.Location = new System.Drawing.Point(12, 12);
+            geoPoint1.X = 0D;
+            geoPoint1.Y = 0D;
+            this.mapControl.MapCenter = geoPoint1;
+            this.mapControl.MapScale = 1D;
+            this.mapControl.Name = "mapControl";
+            this.mapControl.Size = new System.Drawing.Size(758, 729);
+            this.mapControl.TabIndex = 0;
             // 
             // Form
             // 
