@@ -9,9 +9,20 @@ using System.Windows.Forms;
 
 namespace MiniGIS
 {
+    public enum Tool
+    {
+        None,
+        Select,
+        Pan,
+        ZoomIn,
+        ZoomOut,
+        EntireView
+    }
+
     public partial class Form : System.Windows.Forms.Form
     {
-        
+        public Tool CurrentTool { get; set; }
+
         public Form()
         {
             InitializeComponent();
@@ -52,9 +63,19 @@ namespace MiniGIS
             layer1.AddMapObject(polyLine);
             layer1.AddMapObject(polygon);
             mapControl.AddLayer(layer1);
+
+            CurrentTool = Tool.None;
+        }
+
+        private void OnToolStripBtnClicked(object sender, EventArgs e)
+        {
+            var btn = sender as ToolStripButton;
+            var toolBtnType = btn.Text;
+            Tool currentTool;
+            if(Enum.TryParse(toolBtnType, out currentTool))
+            {
+                CurrentTool = currentTool;
+            }
         }
     }
 }
-
-//Select(Выбор), Pan(Ладошка), Zoom In(приближение) Zoom Out(Отдаление), Entire view(Показать целиком) - перечиление
-//При выборе перечисление попадает в поле формы

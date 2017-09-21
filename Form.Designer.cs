@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            MiniGIS.GEOPoint geoPoint1 = new MiniGIS.GEOPoint();
+            MiniGIS.GEOPoint geoPoint4 = new MiniGIS.GEOPoint();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.selectBtn = new System.Windows.Forms.ToolStripButton();
             this.panBtn = new System.Windows.Forms.ToolStripButton();
@@ -62,6 +62,7 @@
             this.selectBtn.Name = "selectBtn";
             this.selectBtn.Size = new System.Drawing.Size(24, 24);
             this.selectBtn.Text = "Select";
+            this.selectBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
             // 
             // panBtn
             // 
@@ -71,6 +72,7 @@
             this.panBtn.Name = "panBtn";
             this.panBtn.Size = new System.Drawing.Size(24, 24);
             this.panBtn.Text = "Pan";
+            this.panBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
             // 
             // zoomInBtn
             // 
@@ -79,7 +81,8 @@
             this.zoomInBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.zoomInBtn.Name = "zoomInBtn";
             this.zoomInBtn.Size = new System.Drawing.Size(24, 24);
-            this.zoomInBtn.Text = "Zoom In";
+            this.zoomInBtn.Text = "ZoomIn";
+            this.zoomInBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
             // 
             // zoomOutBtn
             // 
@@ -88,7 +91,8 @@
             this.zoomOutBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.zoomOutBtn.Name = "zoomOutBtn";
             this.zoomOutBtn.Size = new System.Drawing.Size(24, 24);
-            this.zoomOutBtn.Text = "Zoom Out";
+            this.zoomOutBtn.Text = "ZoomOut";
+            this.zoomOutBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
             // 
             // entireViewBtn
             // 
@@ -97,14 +101,15 @@
             this.entireViewBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.entireViewBtn.Name = "entireViewBtn";
             this.entireViewBtn.Size = new System.Drawing.Size(24, 24);
-            this.entireViewBtn.Text = "Entire View";
+            this.entireViewBtn.Text = "EntireView";
+            this.entireViewBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
             // 
             // mapControl
             // 
             this.mapControl.Location = new System.Drawing.Point(12, 12);
-            geoPoint1.X = 0D;
-            geoPoint1.Y = 0D;
-            this.mapControl.MapCenter = geoPoint1;
+            geoPoint4.X = 0D;
+            geoPoint4.Y = 0D;
+            this.mapControl.MapCenter = geoPoint4;
             this.mapControl.MapScale = 1D;
             this.mapControl.Name = "mapControl";
             this.mapControl.Size = new System.Drawing.Size(758, 729);
