@@ -11,7 +11,6 @@ namespace MiniGIS
 {
     public enum Tool
     {
-        None,
         Select,
         Pan,
         ZoomIn,
@@ -22,6 +21,7 @@ namespace MiniGIS
     public partial class Form : System.Windows.Forms.Form
     {
         public Tool CurrentTool { get; set; }
+        public ToolStripButton CurrentToolBtn { get; set; }
 
         public Form()
         {
@@ -41,7 +41,7 @@ namespace MiniGIS
 
             var pointY = new Point();
             pointY.Style = new PointStyle("Arial", Convert.ToByte('Y'), 14, System.Drawing.Color.Black);
-            pointY.Position = new GEOPoint(pointX.Style.SymbolSize, this.Height / 2 - 50);
+            pointY.Position = new GEOPoint(pointX.Style.SymbolSize, this.Height / 2 - 60);
 
             var polyLine = new PolyLine();
             polyLine.AddNode(new GEOPoint(0, 0));
@@ -64,7 +64,9 @@ namespace MiniGIS
             layer1.AddMapObject(polygon);
             mapControl.AddLayer(layer1);
 
-            CurrentTool = Tool.None;
+            CurrentTool = Tool.Select;
+            CurrentToolBtn = selectBtn;
+            CurrentToolBtn.Checked = true;
         }
 
         private void OnToolStripBtnClicked(object sender, EventArgs e)
@@ -75,6 +77,9 @@ namespace MiniGIS
             if(Enum.TryParse(toolBtnType, out currentTool))
             {
                 CurrentTool = currentTool;
+                CurrentToolBtn.Checked = false;
+                CurrentToolBtn = btn;
+                CurrentToolBtn.Checked = true;
             }
         }
     }
