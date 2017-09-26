@@ -58,8 +58,8 @@ namespace MiniGIS
         public GEOPoint ScreenToMap(System.Drawing.Point screenPoint)
         {
             var mapPoint = new GEOPoint();
-            mapPoint.X = (screenPoint.X - this.Width / 2) / MapScale - MapCenter.X;
-            mapPoint.Y = -(screenPoint.Y - this.Height / 2) / MapScale + MapCenter.Y;
+            mapPoint.X = (-screenPoint.X + this.Width / 2) / MapScale + MapCenter.X;
+            mapPoint.Y = (screenPoint.Y - this.Height / 2) / MapScale + MapCenter.Y;
             return mapPoint;
         }
 
@@ -86,30 +86,74 @@ namespace MiniGIS
 
         private void Map_MouseDown(object sender, MouseEventArgs e)
         {
-            IsMouseDown = true;
-            MouseDownPosition = e.Location;
+            switch(CurrentTool)
+            {
+                case Tool.Select:
+                    break;
+                case Tool.Pan:
+                    IsMouseDown = true;
+                    MouseDownPosition = e.Location;
+                    Cursor = Cursors.Hand;
+                    break;
+                case Tool.ZoomIn:
+                    MouseDownPosition = e.Location;
+                    MapScale *= 2;
+                    MapCenter = ScreenToMap(MouseDownPosition);
+                    Cursor = Cursors.Cross;
+                    Refresh();
+                    break;
+                case Tool.ZoomOut:
+                    MouseDownPosition = e.Location;
+                    MapScale /= 2;
+                    MapCenter = ScreenToMap(MouseDownPosition);
+                    Refresh();
+                    break;
+            }
         }
 
         private void Map_MouseMove(object sender, MouseEventArgs e)
         {
-            if(IsMouseDown)
+            switch(CurrentTool)
             {
-                double dx, dy;
-                dx = MouseDownPosition.X - e.X;
-                dy = MouseDownPosition.Y - e.Y;
+                case Tool.Select:
+                    break;
+                case Tool.Pan:
+                    if(IsMouseDown)
+                    {
+                        double dx, dy;
+                        dx = MouseDownPosition.X - e.X;
+                        dy = MouseDownPosition.Y - e.Y;
 
-                MapCenter.X -= dx;
-                MapCenter.Y += dy;
+                        MapCenter.X -= dx / MapScale;
+                        MapCenter.Y += dy / MapScale;
 
-                MouseDownPosition = e.Location;
+                        MouseDownPosition = e.Location;
 
-                Refresh();
+                        Refresh();
+                    }
+                    break;
+                case Tool.ZoomIn:
+                    break;
+                case Tool.ZoomOut:
+                    break;
             }
         }
 
         private void Map_MouseUp(object sender, MouseEventArgs e)
         {
-            IsMouseDown = false;
+            switch(CurrentTool)
+            {
+                case Tool.Select:
+                    break;
+                case Tool.Pan:
+                    IsMouseDown = false;
+                    Cursor = Cursors.Default;
+                    break;
+                case Tool.ZoomIn:
+                    break;
+                case Tool.ZoomOut:
+                    break;
+            }
         }
     }
 }
