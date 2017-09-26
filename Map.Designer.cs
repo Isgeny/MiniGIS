@@ -37,6 +37,9 @@
             this.DoubleBuffered = true;
             this.Name = "Map";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Map_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Map_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Map_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Map_MouseUp);
             this.ResumeLayout(false);
 
         }

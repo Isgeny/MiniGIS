@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            MiniGIS.GEOPoint geoPoint4 = new MiniGIS.GEOPoint();
+            MiniGIS.GEOPoint geoPoint1 = new MiniGIS.GEOPoint();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.selectBtn = new System.Windows.Forms.ToolStripButton();
             this.panBtn = new System.Windows.Forms.ToolStripButton();
@@ -102,15 +102,20 @@
             this.entireViewBtn.Name = "entireViewBtn";
             this.entireViewBtn.Size = new System.Drawing.Size(24, 24);
             this.entireViewBtn.Text = "EntireView";
-            this.entireViewBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
             // 
             // mapControl
             // 
+            this.mapControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapControl.CurrentTool = MiniGIS.Tool.Select;
+            this.mapControl.IsMouseDown = false;
             this.mapControl.Location = new System.Drawing.Point(12, 12);
-            geoPoint4.X = 0D;
-            geoPoint4.Y = 0D;
-            this.mapControl.MapCenter = geoPoint4;
+            geoPoint1.X = 0D;
+            geoPoint1.Y = 0D;
+            this.mapControl.MapCenter = geoPoint1;
             this.mapControl.MapScale = 1D;
+            this.mapControl.MouseDownPosition = new System.Drawing.Point(0, 0);
             this.mapControl.Name = "mapControl";
             this.mapControl.Size = new System.Drawing.Size(758, 729);
             this.mapControl.TabIndex = 0;
@@ -125,6 +130,7 @@
             this.Name = "Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MiniGIS";
+            this.Resize += new System.EventHandler(this.Form_Resize);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.ResumeLayout(false);

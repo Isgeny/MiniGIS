@@ -9,18 +9,8 @@ using System.Windows.Forms;
 
 namespace MiniGIS
 {
-    public enum Tool
-    {
-        Select,
-        Pan,
-        ZoomIn,
-        ZoomOut,
-        EntireView
-    }
-
     public partial class Form : System.Windows.Forms.Form
     {
-        public Tool CurrentTool { get; set; }
         public ToolStripButton CurrentToolBtn { get; set; }
 
         public Form()
@@ -64,7 +54,7 @@ namespace MiniGIS
             layer1.AddMapObject(polygon);
             mapControl.AddLayer(layer1);
 
-            CurrentTool = Tool.Select;
+            mapControl.CurrentTool = Tool.Select;
             CurrentToolBtn = selectBtn;
             CurrentToolBtn.Checked = true;
         }
@@ -76,11 +66,16 @@ namespace MiniGIS
             Tool currentTool;
             if(Enum.TryParse(toolBtnType, out currentTool))
             {
-                CurrentTool = currentTool;
+                mapControl.CurrentTool = currentTool;
                 CurrentToolBtn.Checked = false;
                 CurrentToolBtn = btn;
                 CurrentToolBtn.Checked = true;
             }
+        }
+
+        private void Form_Resize(object sender, EventArgs e)
+        {
+            Refresh();
         }
     }
 }
