@@ -49,5 +49,10 @@ namespace MiniGIS
                 mapObject.Draw(e);
             }
         }
+
+        public void Clear()
+        {
+            MapObjects.Clear();
+        }
     }
 }

@@ -37,13 +37,13 @@ namespace MiniGIS
             polyLine.AddNode(new GEOPoint(0, 0));
             polyLine.AddNode(new GEOPoint(-50, -50));
             polyLine.AddNode(new GEOPoint(-180, -250));
-            polyLine.AddNode(new GEOPoint(180, 100));
+            polyLine.AddNode(new GEOPoint(-180, 75));
 
             var polygon = new Polygon();
-            polygon.AddNode(new GEOPoint(45, 75));
-            polygon.AddNode(new GEOPoint(85, -50));
-            polygon.AddNode(new GEOPoint(100, 0));
-            polygon.AddNode(new GEOPoint(-75, 50));
+            polygon.AddNode(new GEOPoint(50, 0));
+            polygon.AddNode(new GEOPoint(200, 0));
+            polygon.AddNode(new GEOPoint(200, 100));
+            polygon.AddNode(new GEOPoint(50, 100));
 
             var layer1 = new Layer();
             layer1.AddMapObject(OX);
@@ -76,6 +76,11 @@ namespace MiniGIS
         private void Form_Resize(object sender, EventArgs e)
         {
             Refresh();
+        }
+
+        private void mapControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Map Center: " + mapControl.MapCenter.X + " : " + mapControl.MapCenter.Y + " | " +  e.X + " : " + e.Y + " | " + mapControl.ScreenToMap(e.Location).X + " : " +  mapControl.ScreenToMap(e.Location).Y + " | " + mapControl.MapToScreen(mapControl.ScreenToMap(e.Location)).X + " : " + mapControl.MapToScreen(mapControl.ScreenToMap(e.Location)).Y;
         }
     }
 }

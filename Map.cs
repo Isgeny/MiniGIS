@@ -26,6 +26,9 @@ namespace MiniGIS
         public Tool CurrentTool { get; set; }
         public bool IsMouseDown { get; set; }
         public System.Drawing.Point MouseDownPosition {get; set; }
+        private const int shake = 5;
+
+        private Layer cosmeticLayer;
 
         public Map()
         {
@@ -34,6 +37,9 @@ namespace MiniGIS
             MapCenter = new GEOPoint();
             Layers = new List<Layer>();
             IsMouseDown = false;
+
+            cosmeticLayer = new Layer();
+            AddLayer(cosmeticLayer);
         }       
 
         private void Map_Paint(object sender, PaintEventArgs e)
@@ -50,16 +56,16 @@ namespace MiniGIS
         public System.Drawing.Point MapToScreen(GEOPoint mapPoint)
         {
             var screenPoint = new System.Drawing.Point();
-            screenPoint.X = (int)((mapPoint.X + MapCenter.X) * MapScale + this.Width / 2 + 0.5);
-            screenPoint.Y = (int)(-(mapPoint.Y + MapCenter.Y) * MapScale + this.Height / 2 + 0.5);
+            screenPoint.X = (int)((mapPoint.X - MapCenter.X) * MapScale + this.Width / 2 + 0.5);
+            screenPoint.Y = (int)(-(mapPoint.Y - MapCenter.Y) * MapScale + this.Height / 2 + 0.5);
             return screenPoint;
         }
 
         public GEOPoint ScreenToMap(System.Drawing.Point screenPoint)
         {
             var mapPoint = new GEOPoint();
-            mapPoint.X = (-screenPoint.X + this.Width / 2) / MapScale + MapCenter.X;
-            mapPoint.Y = (screenPoint.Y - this.Height / 2) / MapScale + MapCenter.Y;
+            mapPoint.X = (screenPoint.X - this.Width / 2) / MapScale + MapCenter.X;
+            mapPoint.Y = -(screenPoint.Y - this.Height / 2) / MapScale + MapCenter.Y;
             return mapPoint;
         }
 
@@ -96,17 +102,12 @@ namespace MiniGIS
                     Cursor = Cursors.Hand;
                     break;
                 case Tool.ZoomIn:
+                    IsMouseDown = true;
                     MouseDownPosition = e.Location;
-                    MapScale *= 2;
-                    MapCenter = ScreenToMap(MouseDownPosition);
-                    Cursor = Cursors.Cross;
-                    Refresh();
                     break;
                 case Tool.ZoomOut:
+                    IsMouseDown = true;
                     MouseDownPosition = e.Location;
-                    MapScale /= 2;
-                    MapCenter = ScreenToMap(MouseDownPosition);
-                    Refresh();
                     break;
             }
         }
@@ -124,8 +125,8 @@ namespace MiniGIS
                         dx = MouseDownPosition.X - e.X;
                         dy = MouseDownPosition.Y - e.Y;
 
-                        MapCenter.X -= dx / MapScale;
-                        MapCenter.Y += dy / MapScale;
+                        MapCenter.X += dx / MapScale;
+                        MapCenter.Y -= dy / MapScale;
 
                         MouseDownPosition = e.Location;
 
@@ -133,6 +134,21 @@ namespace MiniGIS
                     }
                     break;
                 case Tool.ZoomIn:
+                    if(IsMouseDown)
+                    {
+                        Refresh();
+                        var g = CreateGraphics();
+
+                        var frame = new PolyLine();
+                        frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, MouseDownPosition.Y)));
+                        frame.AddNode(ScreenToMap(new System.Drawing.Point(e.X, MouseDownPosition.Y)));
+                        frame.AddNode(ScreenToMap(new System.Drawing.Point(e.X, e.Y)));
+                        frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, e.Y)));
+                        frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, MouseDownPosition.Y)));
+
+                        cosmeticLayer.Clear();
+                        cosmeticLayer.AddMapObject(frame);
+                    }
                     break;
                 case Tool.ZoomOut:
                     break;
@@ -150,8 +166,36 @@ namespace MiniGIS
                     Cursor = Cursors.Default;
                     break;
                 case Tool.ZoomIn:
+                    cosmeticLayer.Clear();
+                    double Dx = Math.Abs(MouseDownPosition.X - e.X);
+                    double Dy = Math.Abs(MouseDownPosition.Y - e.Y);
+                    if(Dx > shake || Dy > shake)
+                    {
+                        GEOPoint newCenter = ScreenToMap(new System.Drawing.Point((e.X + MouseDownPosition.X) / 2, (e.Y + MouseDownPosition.Y) / 2));
+                        MapCenter = newCenter;
+                        if(Width / Dx > Height / Dy)
+                        {
+                            MapScale *= Width / Dx;
+                        }
+                        else
+                        {
+                            MapScale *= Height / Dy;
+                        }
+                    }
+                    else
+                    {
+                        MapCenter = ScreenToMap(MouseDownPosition);
+                        MapScale *= 2;
+                        Cursor = Cursors.Cross;
+                    }
+                    IsMouseDown = false;
+                    Refresh();
                     break;
                 case Tool.ZoomOut:
+                    IsMouseDown = false;
+                    MapCenter = ScreenToMap(MouseDownPosition);
+                    MapScale /= 2;
+                    Refresh();
                     break;
             }
         }
