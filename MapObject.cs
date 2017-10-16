@@ -19,7 +19,15 @@ namespace MiniGIS
     {
         public MapObjectType Type { get; set; }
         public Layer Layer {get; set; }
+        public GEORect GEOBounds
+        { 
+            get
+            {
+                return GetBounds();
+            }
+        }
 
         public abstract void Draw(PaintEventArgs e);
+        public abstract GEORect GetBounds();
     }
 }

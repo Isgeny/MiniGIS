@@ -34,5 +34,10 @@ namespace MiniGIS
 
             graphics.DrawString(symbol, font, brush, screenLocaltion);
         }
+
+        public override GEORect GetBounds()
+        {
+            return new GEORect(Position.X, Position.X, Position.Y, Position.Y);
+        }
     }
 }

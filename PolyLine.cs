@@ -78,5 +78,18 @@ namespace MiniGIS
 
             graphics.DrawLines(pen, points);
         }
+
+        public override GEORect GetBounds()
+        {
+            double xMin = Nodes[0].X, xMax = Nodes[0].X, yMin = Nodes[0].Y, yMax = Nodes[0].Y;
+            foreach(var node in Nodes)
+            {
+                xMin = Math.Min(xMin, node.X);
+                xMax = Math.Max(xMax, node.X);
+                yMin = Math.Min(yMin, node.Y);
+                yMax = Math.Max(yMax, node.Y);
+            }
+            return new GEORect(xMin, xMax, yMin, yMax);
+        }
     }
 }

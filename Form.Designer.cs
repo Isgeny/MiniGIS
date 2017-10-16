@@ -35,9 +35,9 @@
             this.zoomInBtn = new System.Windows.Forms.ToolStripButton();
             this.zoomOutBtn = new System.Windows.Forms.ToolStripButton();
             this.entireViewBtn = new System.Windows.Forms.ToolStripButton();
-            this.mapControl = new MiniGIS.Map();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mapControl = new MiniGIS.Map();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -105,24 +105,7 @@
             this.entireViewBtn.Name = "entireViewBtn";
             this.entireViewBtn.Size = new System.Drawing.Size(24, 24);
             this.entireViewBtn.Text = "EntireView";
-            // 
-            // mapControl
-            // 
-            this.mapControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mapControl.CurrentTool = MiniGIS.Tool.Select;
-            this.mapControl.IsMouseDown = false;
-            this.mapControl.Location = new System.Drawing.Point(12, 12);
-            geoPoint1.X = 0D;
-            geoPoint1.Y = 0D;
-            this.mapControl.MapCenter = geoPoint1;
-            this.mapControl.MapScale = 1D;
-            this.mapControl.MouseDownPosition = new System.Drawing.Point(0, 0);
-            this.mapControl.Name = "mapControl";
-            this.mapControl.Size = new System.Drawing.Size(758, 729);
-            this.mapControl.TabIndex = 0;
-            this.mapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapControl_MouseMove);
+            this.entireViewBtn.Click += new System.EventHandler(this.entireViewBtn_Click);
             // 
             // statusStrip1
             // 
@@ -140,6 +123,24 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // mapControl
+            // 
+            this.mapControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapControl.CurrentTool = MiniGIS.Tool.Select;
+            this.mapControl.IsMouseDown = false;
+            this.mapControl.Location = new System.Drawing.Point(0, 30);
+            geoPoint1.X = 0D;
+            geoPoint1.Y = 0D;
+            this.mapControl.MapCenter = geoPoint1;
+            this.mapControl.MapScale = 1D;
+            this.mapControl.MouseDownPosition = new System.Drawing.Point(0, 0);
+            this.mapControl.Name = "mapControl";
+            this.mapControl.Size = new System.Drawing.Size(782, 695);
+            this.mapControl.TabIndex = 0;
+            this.mapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapControl_MouseMove);
             // 
             // Form
             // 

@@ -16,6 +16,7 @@ namespace MiniGIS
         Pan,
         ZoomIn,
         ZoomOut,
+        EntireView
     }
 
     public partial class Map : UserControl
@@ -25,10 +26,25 @@ namespace MiniGIS
         public GEOPoint MapCenter { get; set; }
         public Tool CurrentTool { get; set; }
         public bool IsMouseDown { get; set; }
-        public System.Drawing.Point MouseDownPosition {get; set; }
+        public System.Drawing.Point MouseDownPosition { get; set; }
         private const int shake = 5;
-
         private Layer cosmeticLayer;
+
+        public GEORect GEOBounds
+        {
+            get
+            {
+                var result = new GEORect(0.0, 0.0, 0.0, 0.0);
+                foreach(var layer in Layers)
+                {
+                    if(layer.Visible)
+                    {
+                        result = GEORect.Union(result, layer.GEOBounds);
+                    }
+                }
+                return result;
+            }
+        }
 
         public Map()
         {
@@ -109,6 +125,8 @@ namespace MiniGIS
                     IsMouseDown = true;
                     MouseDownPosition = e.Location;
                     break;
+                case Tool.EntireView:
+                    break;
             }
         }
 
@@ -151,6 +169,8 @@ namespace MiniGIS
                     }
                     break;
                 case Tool.ZoomOut:
+                    break;
+                case Tool.EntireView:
                     break;
             }
         }
@@ -196,6 +216,9 @@ namespace MiniGIS
                     MapCenter = ScreenToMap(MouseDownPosition);
                     MapScale /= 2;
                     Refresh();
+                    break;
+                case Tool.EntireView:
+
                     break;
             }
         }

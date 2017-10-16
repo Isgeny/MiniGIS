@@ -13,18 +13,21 @@ namespace MiniGIS
         public string Name { get; set; }
         public bool Visible { get; set; }
         public Map Map { get; set; }
+        public GEORect GEOBounds { get; set; }
 
         public Layer()
         {
             Name = "";
             Visible = true;
             MapObjects = new List<MapObject>();
+            GEOBounds = new GEORect(0.0, 0.0, 0.0, 0.0);
         }
 
         public void AddMapObject(MapObject mapObject)
         {
             mapObject.Layer = this;
             MapObjects.Add(mapObject);
+            GEOBounds = GEORect.Union(GEOBounds, mapObject.GEOBounds);
         }
 
         public void InsertMapObject(int index, MapObject mapObject)

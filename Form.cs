@@ -34,10 +34,10 @@ namespace MiniGIS
             pointY.Position = new GEOPoint(pointX.Style.SymbolSize, this.Height / 2 - 60);
 
             var polyLine = new PolyLine();
-            polyLine.AddNode(new GEOPoint(0, 0));
-            polyLine.AddNode(new GEOPoint(-50, -50));
-            polyLine.AddNode(new GEOPoint(-180, -250));
-            polyLine.AddNode(new GEOPoint(-180, 75));
+            polyLine.AddNode(new GEOPoint(300, 200));
+            polyLine.AddNode(new GEOPoint(700, 100));
+            polyLine.AddNode(new GEOPoint(200, -500));
+            polyLine.AddNode(new GEOPoint(-800, 75));
 
             var polygon = new Polygon();
             polygon.AddNode(new GEOPoint(50, 0));
@@ -80,7 +80,25 @@ namespace MiniGIS
 
         private void mapControl_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "Map Center: " + mapControl.MapCenter.X + " : " + mapControl.MapCenter.Y + " | " +  e.X + " : " + e.Y + " | " + mapControl.ScreenToMap(e.Location).X + " : " +  mapControl.ScreenToMap(e.Location).Y + " | " + mapControl.MapToScreen(mapControl.ScreenToMap(e.Location)).X + " : " + mapControl.MapToScreen(mapControl.ScreenToMap(e.Location)).Y;
+            toolStripStatusLabel1.Text = "Map Center: " + mapControl.MapCenter.X + " : " + mapControl.MapCenter.Y + " | " + "Scale: " + mapControl.MapScale + " | " +  e.X + " : " + e.Y + " | " + mapControl.ScreenToMap(e.Location).X + " : " +  mapControl.ScreenToMap(e.Location).Y + " | " + mapControl.MapToScreen(mapControl.ScreenToMap(e.Location)).X + " : " + mapControl.MapToScreen(mapControl.ScreenToMap(e.Location)).Y;
+        }
+
+        private void entireViewBtn_Click(object sender, EventArgs e)
+        {
+            var bounds = mapControl.GEOBounds;
+            double Dx = Math.Abs(bounds.XMax - bounds.XMin);
+            double Dy = Math.Abs(bounds.YMax - bounds.YMin);
+            GEOPoint newCenter = new GEOPoint((bounds.XMin + bounds.XMax) / 2.0, (bounds.YMin + bounds.YMax) / 2.0);
+            mapControl.MapCenter = newCenter;
+            if(Width / Dx < Height / Dy)
+            {
+                mapControl.MapScale = Width / Dx - 0.02;
+            }
+            else
+            {
+                mapControl.MapScale = Height / Dy - 0.02;
+            }
+            mapControl.Refresh();
         }
     }
 }

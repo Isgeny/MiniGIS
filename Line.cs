@@ -34,5 +34,14 @@ namespace MiniGIS
 
             graphics.DrawLine(pen, screenLocaltionBeginPoint, screenLocaltionEndPoint);
         }
+
+        public override GEORect GetBounds()
+        {
+            double xMin = Math.Min(BeginPoint.X, EndPoint.X);
+            double xMax = Math.Max(BeginPoint.X, EndPoint.X);
+            double yMin = Math.Min(BeginPoint.Y, EndPoint.Y);
+            double yMax = Math.Max(BeginPoint.Y, EndPoint.Y);
+            return new GEORect(xMin, xMax, yMin, yMax);
+        }
     }
 }
