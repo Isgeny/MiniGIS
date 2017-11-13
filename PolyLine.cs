@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace MiniGIS
 {
@@ -15,21 +12,22 @@ namespace MiniGIS
 
         public PolyLine()
         {
-            Nodes = new List<GEOPoint>();
             Type = MapObjectType.PolyLine;
+            Nodes = new List<GEOPoint>();
             LineStyle = new LineStyle();
         }
 
-        public PolyLine(List<GEOPoint> nodes)
+        public PolyLine(List<GEOPoint> nodes, LineStyle style)
         {
-            int nodesCount = nodes.Count;
+            Type = MapObjectType.PolyLine;
+            int nodesCount = CountNodes();
             Nodes = new List<GEOPoint>(nodesCount);
             foreach(var node in nodes)
             {
                 var point = new GEOPoint(node.X, node.Y);
                 Nodes.Add(point);
             }
-            Type = MapObjectType.PolyLine;
+            LineStyle = style;
         }
 
         public void AddNode(GEOPoint point)
@@ -90,6 +88,21 @@ namespace MiniGIS
                 yMax = Math.Max(yMax, node.Y);
             }
             return new GEORect(xMin, xMax, yMin, yMax);
+        }
+
+        public override bool IsInside(GEORect geoRect)
+        {
+            for(int i = 0; i < CountNodes() - 2; ++i)
+            {
+                var line = new Line();
+                line.BeginPoint = Nodes[i];
+                line.EndPoint = Nodes[i + 1];
+                if(GEORect.IsCrossRectLines(geoRect, line))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace MiniGIS
 {
@@ -13,7 +8,12 @@ namespace MiniGIS
 
         public PolygonStyle()
         {
-            Color = Color.Green;
+            Color = Color.Aqua;
+        }
+
+        public PolygonStyle(Color color)
+        {
+            Color = color;
         }
     }
 }

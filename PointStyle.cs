@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace MiniGIS
 {
@@ -17,7 +12,7 @@ namespace MiniGIS
         public PointStyle()
         {
             FontFamily = "Wingdings";
-            Symbol = 0x38;
+            Symbol = 0x43;
             SymbolSize = 40;
             SymbolColor = Color.Black;
         }

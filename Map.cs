@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace MiniGIS
 {
@@ -15,8 +9,7 @@ namespace MiniGIS
         Select,
         Pan,
         ZoomIn,
-        ZoomOut,
-        EntireView
+        ZoomOut
     }
 
     public partial class Map : UserControl
@@ -29,6 +22,18 @@ namespace MiniGIS
         public System.Drawing.Point MouseDownPosition { get; set; }
         private const int shake = 5;
         private Layer cosmeticLayer;
+
+        public Map()
+        {
+            InitializeComponent();
+            MapScale = 1.0;
+            MapCenter = new GEOPoint();
+            Layers = new List<Layer>();
+            IsMouseDown = false;
+
+            cosmeticLayer = new Layer();
+            AddLayer(cosmeticLayer);
+        }
 
         public GEORect GEOBounds
         {
@@ -46,18 +51,6 @@ namespace MiniGIS
             }
         }
 
-        public Map()
-        {
-            InitializeComponent();
-            MapScale = 1.0;
-            MapCenter = new GEOPoint();
-            Layers = new List<Layer>();
-            IsMouseDown = false;
-
-            cosmeticLayer = new Layer();
-            AddLayer(cosmeticLayer);
-        }       
-
         private void Map_Paint(object sender, PaintEventArgs e)
         {
             foreach(var layer in Layers)
@@ -69,6 +62,7 @@ namespace MiniGIS
             }
         }
 
+        // Перевод координат карты в координаты экрана
         public System.Drawing.Point MapToScreen(GEOPoint mapPoint)
         {
             var screenPoint = new System.Drawing.Point();
@@ -77,6 +71,7 @@ namespace MiniGIS
             return screenPoint;
         }
 
+        // Перевод координат экрана в координаты карты
         public GEOPoint ScreenToMap(System.Drawing.Point screenPoint)
         {
             var mapPoint = new GEOPoint();
@@ -111,6 +106,8 @@ namespace MiniGIS
             switch(CurrentTool)
             {
                 case Tool.Select:
+                    IsMouseDown = true;
+                    MouseDownPosition = e.Location;
                     break;
                 case Tool.Pan:
                     IsMouseDown = true;
@@ -124,8 +121,6 @@ namespace MiniGIS
                 case Tool.ZoomOut:
                     IsMouseDown = true;
                     MouseDownPosition = e.Location;
-                    break;
-                case Tool.EntireView:
                     break;
             }
         }
@@ -152,25 +147,26 @@ namespace MiniGIS
                     }
                     break;
                 case Tool.ZoomIn:
-                    if(IsMouseDown)
+                    if(Math.Abs(MouseDownPosition.X - e.X) > shake || Math.Abs(MouseDownPosition.Y - e.Y) > shake)
                     {
-                        Refresh();
-                        var g = CreateGraphics();
+                        if(IsMouseDown)
+                        {
+                            Refresh();
+                            var g = CreateGraphics();
 
-                        var frame = new PolyLine();
-                        frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, MouseDownPosition.Y)));
-                        frame.AddNode(ScreenToMap(new System.Drawing.Point(e.X, MouseDownPosition.Y)));
-                        frame.AddNode(ScreenToMap(new System.Drawing.Point(e.X, e.Y)));
-                        frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, e.Y)));
-                        frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, MouseDownPosition.Y)));
+                            var frame = new PolyLine();
+                            frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, MouseDownPosition.Y)));
+                            frame.AddNode(ScreenToMap(new System.Drawing.Point(e.X, MouseDownPosition.Y)));
+                            frame.AddNode(ScreenToMap(new System.Drawing.Point(e.X, e.Y)));
+                            frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, e.Y)));
+                            frame.AddNode(ScreenToMap(new System.Drawing.Point(MouseDownPosition.X, MouseDownPosition.Y)));
 
-                        cosmeticLayer.Clear();
-                        cosmeticLayer.AddMapObject(frame);
+                            cosmeticLayer.Clear();
+                            cosmeticLayer.AddMapObject(frame);
+                        }
                     }
                     break;
                 case Tool.ZoomOut:
-                    break;
-                case Tool.EntireView:
                     break;
             }
         }
@@ -180,6 +176,19 @@ namespace MiniGIS
             switch(CurrentTool)
             {
                 case Tool.Select:
+                    double Dx1 = Math.Abs(MouseDownPosition.X - e.X);
+                    double Dy1 = Math.Abs(MouseDownPosition.Y - e.Y);
+                    if(Dx1 < shake && Dy1 < shake)
+                    {
+                        GEOPoint searchCenter = ScreenToMap(e.Location);
+                        double xMin = searchCenter.X - shake / 2.0 / MapScale;
+                        double xMax = searchCenter.X + shake / 2.0 / MapScale;
+                        double yMin = searchCenter.Y - shake / 2.0 / MapScale;
+                        double yMax = searchCenter.Y + shake / 2.0 / MapScale;
+                        GEORect searchRect = new GEORect(xMin, xMax, yMin, yMax);
+                        MapObject result = FindObject(searchRect);
+                    }
+                    IsMouseDown = false;
                     break;
                 case Tool.Pan:
                     IsMouseDown = false;
@@ -189,6 +198,8 @@ namespace MiniGIS
                     cosmeticLayer.Clear();
                     double Dx = Math.Abs(MouseDownPosition.X - e.X);
                     double Dy = Math.Abs(MouseDownPosition.Y - e.Y);
+
+                    // Приблежение c помощью рамки
                     if(Dx > shake || Dy > shake)
                     {
                         GEOPoint newCenter = ScreenToMap(new System.Drawing.Point((e.X + MouseDownPosition.X) / 2, (e.Y + MouseDownPosition.Y) / 2));
@@ -202,6 +213,7 @@ namespace MiniGIS
                             MapScale *= Height / Dy;
                         }
                     }
+                    // Точечное приближение
                     else
                     {
                         MapCenter = ScreenToMap(MouseDownPosition);
@@ -217,10 +229,24 @@ namespace MiniGIS
                     MapScale /= 2;
                     Refresh();
                     break;
-                case Tool.EntireView:
-
-                    break;
             }
+        }
+
+        private MapObject FindObject(GEORect searchRect)
+        {
+            for(int i = Layers.Count - 1; i > 0; --i)
+            {
+                var layer = Layers[i];
+                if(layer.Visible)
+                {
+                    var result = layer.FindObject(searchRect);
+                    if(result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

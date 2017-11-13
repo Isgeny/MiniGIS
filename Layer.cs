@@ -1,9 +1,5 @@
-﻿using System;
+﻿using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MiniGIS
 {
@@ -13,6 +9,8 @@ namespace MiniGIS
         public string Name { get; set; }
         public bool Visible { get; set; }
         public Map Map { get; set; }
+
+        // Прямоугольная область в которую вписаны все мап объекты
         public GEORect GEOBounds { get; set; }
 
         public Layer()
@@ -56,6 +54,19 @@ namespace MiniGIS
         public void Clear()
         {
             MapObjects.Clear();
+        }
+
+        // Ищет объект который находится в данном прямоугольнике
+        public MapObject FindObject(GEORect searchRect)
+        {
+            for(int i = CountMapObjects() - 1; i >= 0; --i)
+            {
+                if(MapObjects[i].IsInside(searchRect))
+                {
+                    return MapObjects[i];
+                }
+            }
+            return null;
         }
     }
 }

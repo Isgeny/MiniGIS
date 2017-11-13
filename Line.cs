@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace MiniGIS
 {
@@ -16,10 +12,18 @@ namespace MiniGIS
 
         public Line()
         {
+            Type = MapObjectType.Line;
             BeginPoint = new GEOPoint();
             EndPoint = new GEOPoint();
-            Type = MapObjectType.Line;
             Style = new LineStyle();
+        }
+
+        public Line(GEOPoint beginPoint, GEOPoint endPoint, LineStyle style)
+        {
+            Type = MapObjectType.Line;
+            BeginPoint = beginPoint;
+            EndPoint = endPoint;
+            Style = style;
         }
 
         public override void Draw(PaintEventArgs e)
@@ -42,6 +46,24 @@ namespace MiniGIS
             double yMin = Math.Min(BeginPoint.Y, EndPoint.Y);
             double yMax = Math.Max(BeginPoint.Y, EndPoint.Y);
             return new GEORect(xMin, xMax, yMin, yMax);
+        }
+
+        public override bool IsInside(GEORect geoRect)
+        {
+            return GEORect.IsCrossRectLines(geoRect, this);
+        }
+
+        public static bool IsCrossLines(Line line1, Line line2)
+        {
+            double v1 = (line1.EndPoint.X - line1.BeginPoint.X) * (line2.BeginPoint.Y - line1.BeginPoint.Y) - (line1.EndPoint.Y - line1.BeginPoint.Y) * (line2.BeginPoint.X - line1.BeginPoint.X);
+            double v2 = (line1.EndPoint.X - line1.BeginPoint.X) * (line2.EndPoint.Y - line1.BeginPoint.Y) - (line1.EndPoint.Y - line1.BeginPoint.Y) * (line2.EndPoint.X - line1.BeginPoint.X);
+            double v3 = (line2.EndPoint.X - line2.BeginPoint.X) * (line1.BeginPoint.Y - line2.BeginPoint.Y) - (line2.EndPoint.Y - line2.BeginPoint.Y) * (line1.BeginPoint.X - line2.BeginPoint.X);
+            double v4 = (line2.EndPoint.X - line2.BeginPoint.X) * (line1.EndPoint.Y - line2.BeginPoint.Y) - (line2.EndPoint.Y - line2.BeginPoint.Y) * (line1.EndPoint.X - line2.BeginPoint.X);
+            if(v1 * v2 < 0 && v3 * v4 < 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
