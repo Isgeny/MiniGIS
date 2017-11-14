@@ -22,7 +22,7 @@ namespace MiniGIS
         public System.Drawing.Point MouseDownPosition { get; set; }
         private const int shake = 5;
         private Layer cosmeticLayer;
-        private MapObject selectedObject;
+        public List<MapObject> SelectedObjects { get; set; }
 
         public Map()
         {
@@ -31,10 +31,10 @@ namespace MiniGIS
             MapCenter = new GEOPoint();
             Layers = new List<Layer>();
             IsMouseDown = false;
+            SelectedObjects = new List<MapObject>();
 
             cosmeticLayer = new Layer();
             AddLayer(cosmeticLayer);
-            selectedObject = null;
         }
 
         public GEORect GEOBounds
@@ -188,14 +188,34 @@ namespace MiniGIS
                         double yMin = searchCenter.Y - shake / 2.0 / MapScale;
                         double yMax = searchCenter.Y + shake / 2.0 / MapScale;
                         GEORect searchRect = new GEORect(xMin, xMax, yMin, yMax);
-                        if(selectedObject != null)
+                        MapObject result = FindObject(searchRect);
+                        if(result != null)
                         {
-                            selectedObject.Selected = false;
+                            // Множественное выделение объектов с помощью ctrl
+                            if(ModifierKeys.HasFlag(Keys.Control))
+                            {
+                                result.Selected = !result.Selected;
+                            }
+                            // Одиночное выделение объекта
+                            else
+                            {
+                                foreach(var selectedObject in SelectedObjects)
+                                {
+                                    selectedObject.Selected = false;
+                                }
+                                SelectedObjects.Clear();
+                                result.Selected = true;
+                            }
+                            SelectedObjects.Add(result);
                         }
-                        selectedObject = FindObject(searchRect);
-                        if(selectedObject != null)
+                        // Если кликнули не по объекту то очищаем выделение всех объектов
+                        else
                         {
-                            selectedObject.Selected = true;
+                            foreach(var selectedObject in SelectedObjects)
+                            {
+                                selectedObject.Selected = false;
+                            }
+                            SelectedObjects.Clear();
                         }
                     }
                     IsMouseDown = false;
