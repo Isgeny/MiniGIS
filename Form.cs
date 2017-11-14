@@ -18,20 +18,20 @@ namespace MiniGIS
             InitializeComponent();
 
             Line OX = new Line();
-            OX.BeginPoint = new GEOPoint(-this.Width / 2, 0);
-            OX.EndPoint = new GEOPoint(this.Width / 2, 0);
+            OX.BeginPoint = new GEOPoint(-map.Width / 2, 0);
+            OX.EndPoint = new GEOPoint(map.Width / 2, 0);
 
             Line OY = new Line();
-            OY.BeginPoint = new GEOPoint(0, this.Height / 2);
-            OY.EndPoint = new GEOPoint(0, -this.Height / 2);
+            OY.BeginPoint = new GEOPoint(0, map.Height / 2);
+            OY.EndPoint = new GEOPoint(0, -map.Height / 2);
 
             var pointX = new Point();
             pointX.Style = new PointStyle("Arial", Convert.ToByte('X'), 14, System.Drawing.Color.Black);
-            pointX.Position = new GEOPoint(this.Width / 2 - 40, pointX.Style.SymbolSize);
+            pointX.Position = new GEOPoint(map.Width / 2 - 20, pointX.Style.SymbolSize);
 
             var pointY = new Point();
             pointY.Style = new PointStyle("Arial", Convert.ToByte('Y'), 14, System.Drawing.Color.Black);
-            pointY.Position = new GEOPoint(pointX.Style.SymbolSize, this.Height / 2 - 60);
+            pointY.Position = new GEOPoint(pointX.Style.SymbolSize, map.Height / 2 - 20);
 
             var polyLine = new PolyLine();
             polyLine.AddNode(new GEOPoint(300, 200));
@@ -97,11 +97,11 @@ namespace MiniGIS
             map.MapCenter = newCenter;
             if(map.Width / Dx < map.Height / Dy)
             {
-                map.MapScale = map.Width / Dx - 0.005;
+                map.MapScale = map.Width / Dx - 0.01;
             }
             else
             {
-                map.MapScale = map.Height / Dy - 0.005;
+                map.MapScale = map.Height / Dy - 0.01;
             }
             map.Refresh();
         }

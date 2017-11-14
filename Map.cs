@@ -34,6 +34,7 @@ namespace MiniGIS
             SelectedObjects = new List<MapObject>();
 
             cosmeticLayer = new Layer();
+            cosmeticLayer.Visible = false;
             AddLayer(cosmeticLayer);
         }
 
@@ -62,6 +63,7 @@ namespace MiniGIS
                     layer.Draw(e);
                 }
             }
+            cosmeticLayer.Draw(e);
         }
 
         // Перевод координат карты в координаты экрана
@@ -131,8 +133,6 @@ namespace MiniGIS
         {
             switch(CurrentTool)
             {
-                case Tool.Select:
-                    break;
                 case Tool.Pan:
                     if(IsMouseDown)
                     {
@@ -148,6 +148,7 @@ namespace MiniGIS
                         Refresh();
                     }
                     break;
+                case Tool.Select:
                 case Tool.ZoomIn:
                     if(Math.Abs(MouseDownPosition.X - e.X) > shake || Math.Abs(MouseDownPosition.Y - e.Y) > shake)
                     {
@@ -168,8 +169,6 @@ namespace MiniGIS
                         }
                     }
                     break;
-                case Tool.ZoomOut:
-                    break;
             }
         }
 
@@ -178,15 +177,18 @@ namespace MiniGIS
             switch(CurrentTool)
             {
                 case Tool.Select:
+                    cosmeticLayer.Clear();
                     double Dx1 = Math.Abs(MouseDownPosition.X - e.X);
                     double Dy1 = Math.Abs(MouseDownPosition.Y - e.Y);
+
+                    // Точеченое выделение
                     if(Dx1 < shake && Dy1 < shake)
                     {
                         GEOPoint searchCenter = ScreenToMap(e.Location);
-                        double xMin = searchCenter.X - shake / 2.0 / MapScale;
-                        double xMax = searchCenter.X + shake / 2.0 / MapScale;
-                        double yMin = searchCenter.Y - shake / 2.0 / MapScale;
-                        double yMax = searchCenter.Y + shake / 2.0 / MapScale;
+                        double xMin = searchCenter.X - shake / 2.0;
+                        double xMax = searchCenter.X + shake / 2.0;
+                        double yMin = searchCenter.Y - shake / 2.0;
+                        double yMax = searchCenter.Y + shake / 2.0;
                         GEORect searchRect = new GEORect(xMin, xMax, yMin, yMax);
                         MapObject result = FindObject(searchRect);
                         if(result != null)
@@ -216,6 +218,30 @@ namespace MiniGIS
                                 selectedObject.Selected = false;
                             }
                             SelectedObjects.Clear();
+                        }
+                    }
+                    // Выделение прямоугольной областью
+                    else
+                    {
+                        GEOPoint begin = ScreenToMap(MouseDownPosition);
+                        GEOPoint end = ScreenToMap(e.Location);
+                        double xMin = Math.Min(begin.X, end.X);
+                        double xMax = Math.Max(begin.X, end.X);
+                        double yMin = Math.Min(begin.Y, end.Y);
+                        double yMax = Math.Max(begin.Y, end.Y);
+                        GEORect searchRect = new GEORect(xMin, xMax, yMin, yMax);
+                        var selectedObjects = FindMapObjects(searchRect);
+
+                        foreach(var selectedObject in SelectedObjects)
+                        {
+                            selectedObject.Selected = false;
+                        }
+                        SelectedObjects.Clear();
+                        
+                        foreach(var selectedObject in selectedObjects)
+                        {
+                            selectedObject.Selected = true;
+                            SelectedObjects.Add(selectedObject);
                         }
                     }
                     IsMouseDown = false;
@@ -281,6 +307,24 @@ namespace MiniGIS
                 }
             }
             return null;
+        }
+
+        private List<MapObject> FindMapObjects(GEORect searchRect)
+        {
+            var mapObjects = new List<MapObject>();
+            for(int i = Layers.Count - 1; i > 0; --i)
+            {
+                var layer = Layers[i];
+                if(layer.Visible)
+                {
+                    var layerObjects = layer.FindObjects(searchRect);
+                    foreach(var layerObject in layerObjects)
+                    {
+                        mapObjects.Add(layerObject);
+                    }
+                }
+            }
+            return mapObjects;
         }
     }
 }

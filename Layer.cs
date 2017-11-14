@@ -68,5 +68,18 @@ namespace MiniGIS
             }
             return null;
         }
+
+        public List<MapObject> FindObjects(GEORect searchRect)
+        {
+            var layerObjects = new List<MapObject>();
+            for(int i = CountMapObjects() - 1; i >= 0; --i)
+            {
+                if(MapObjects[i].IsInside(searchRect))
+                {
+                    layerObjects.Add(MapObjects[i]);
+                }
+            }
+            return layerObjects;
+        }
     }
 }
