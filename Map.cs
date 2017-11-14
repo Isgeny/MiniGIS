@@ -235,20 +235,23 @@ namespace MiniGIS
                     {
                         GEOPoint newCenter = ScreenToMap(new System.Drawing.Point((e.X + MouseDownPosition.X) / 2, (e.Y + MouseDownPosition.Y) / 2));
                         MapCenter = newCenter;
+                        double newMapScale = 0.0;
                         if(Width / Dx > Height / Dy)
                         {
-                            MapScale *= Width / Dx;
+                            newMapScale = MapScale * Width / Dx;
                         }
                         else
                         {
-                            MapScale *= Height / Dy;
+                            newMapScale = MapScale * Height / Dy;
                         }
+                        MapScale = (newMapScale < 10.0) ? newMapScale : 10.0;
                     }
                     // Точечное приближение
                     else
                     {
                         MapCenter = ScreenToMap(MouseDownPosition);
-                        MapScale *= 2;
+                        double newMapScale1 = MapScale * 2.0;
+                        MapScale = (newMapScale1 < 10.0) ? newMapScale1 : 10.0;
                     }
                     IsMouseDown = false;
                     Refresh();
@@ -256,7 +259,8 @@ namespace MiniGIS
                 case Tool.ZoomOut:
                     IsMouseDown = false;
                     MapCenter = ScreenToMap(MouseDownPosition);
-                    MapScale /= 2;
+                    double newMapScale2 = MapScale / 2.0;
+                    MapScale = (newMapScale2 > 0.1) ? newMapScale2 : 0.1;
                     Refresh();
                     break;
             }
