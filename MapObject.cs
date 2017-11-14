@@ -14,10 +14,10 @@ namespace MiniGIS
     {
         public MapObjectType Type { get; set; }
 
-        //Слой, в котором находится данный объект
+        // Слой, в котором находится данный объект
         public Layer Layer {get; set; }
 
-        //Прямоугольная область, в которую вписан данный объект
+        // Прямоугольная область, в которую вписан данный объект
         public GEORect GEOBounds
         { 
             get
@@ -26,13 +26,16 @@ namespace MiniGIS
             }
         }
 
-        //Рисование объекта
+        // Выделен ли объект (рисуется пунктирный контур)
+        public bool Selected { get; set; }
+
+        // Рисование объекта
         public abstract void Draw(PaintEventArgs e);
 
-        //Получение прямоугольной области
+        // Получение прямоугольной области
         public abstract GEORect GetBounds();
 
-        //Проверка вхождения прямоугольника в прямоугольник текущего объекта
+        // Проверка вхождения прямоугольника в прямоугольник текущего объекта
         public abstract bool IsInside(GEORect geoRect);
     }
 }

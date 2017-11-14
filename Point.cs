@@ -29,7 +29,6 @@ namespace MiniGIS
             var screenLocaltion = Layer.Map.MapToScreen(Position);
             var font = new Font(Style.FontFamily, Style.SymbolSize);
             var brush = new SolidBrush(Style.SymbolColor);
-
             var symbol = Convert.ToChar(Style.Symbol).ToString();
             var symbolSize = graphics.MeasureString(symbol, font);
 
@@ -37,6 +36,13 @@ namespace MiniGIS
             screenLocaltion.X -= (int)(symbolSize.Width / 2);
             screenLocaltion.Y -= (int)(symbolSize.Height / 2);
 
+            if(Selected)
+            {
+                var pen = new Pen(Color.Black, 1.0f);
+                pen.DashPattern = new float[] { 4.0f, 2.0f };
+                var rect = new Rectangle(screenLocaltion.X, screenLocaltion.Y, (int)symbolSize.Width, (int)symbolSize.Height - 4);
+                graphics.DrawRectangle(pen, rect);
+            }
             graphics.DrawString(symbol, font, brush, screenLocaltion);
         }
 

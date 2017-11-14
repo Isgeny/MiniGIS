@@ -187,8 +187,13 @@ namespace MiniGIS
                         double yMax = searchCenter.Y + shake / 2.0 / MapScale;
                         GEORect searchRect = new GEORect(xMin, xMax, yMin, yMax);
                         MapObject result = FindObject(searchRect);
+                        if(result != null)
+                        {
+                            result.Selected = true;
+                        }
                     }
                     IsMouseDown = false;
+                    Refresh();
                     break;
                 case Tool.Pan:
                     IsMouseDown = false;

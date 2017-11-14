@@ -35,7 +35,11 @@ namespace MiniGIS
             var lineWidth = Style.Width;
             var lineColor = Style.Color;
             var pen = new Pen(lineColor, lineWidth);
-
+            if(Selected)
+            {
+                pen.DashPattern = new float[] { 4.0f, 2.0f };
+            }
+      
             graphics.DrawLine(pen, screenLocaltionBeginPoint, screenLocaltionEndPoint);
         }
 
