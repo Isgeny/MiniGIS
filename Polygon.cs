@@ -28,6 +28,10 @@ namespace MiniGIS
             var lineWidth = LineStyle.Width;
             var lineColor = LineStyle.Color;
             var pen = new Pen(lineColor, lineWidth);
+            if(Selected)
+            {
+                pen.DashPattern = new float[] { 4.0f, 2.0f };
+            }
 
             var polygonColor = PolygonStyle.Color;
             var brush = new SolidBrush(polygonColor);

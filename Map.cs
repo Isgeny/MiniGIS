@@ -22,6 +22,7 @@ namespace MiniGIS
         public System.Drawing.Point MouseDownPosition { get; set; }
         private const int shake = 5;
         private Layer cosmeticLayer;
+        private MapObject selectedObject;
 
         public Map()
         {
@@ -33,6 +34,7 @@ namespace MiniGIS
 
             cosmeticLayer = new Layer();
             AddLayer(cosmeticLayer);
+            selectedObject = null;
         }
 
         public GEORect GEOBounds
@@ -186,10 +188,14 @@ namespace MiniGIS
                         double yMin = searchCenter.Y - shake / 2.0 / MapScale;
                         double yMax = searchCenter.Y + shake / 2.0 / MapScale;
                         GEORect searchRect = new GEORect(xMin, xMax, yMin, yMax);
-                        MapObject result = FindObject(searchRect);
-                        if(result != null)
+                        if(selectedObject != null)
                         {
-                            result.Selected = true;
+                            selectedObject.Selected = false;
+                        }
+                        selectedObject = FindObject(searchRect);
+                        if(selectedObject != null)
+                        {
+                            selectedObject.Selected = true;
                         }
                     }
                     IsMouseDown = false;

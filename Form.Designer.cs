@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Points");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Lines");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("PolyLines");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Polygons");
             MiniGIS.GEOPoint geoPoint1 = new MiniGIS.GEOPoint();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.selectBtn = new System.Windows.Forms.ToolStripButton();
@@ -37,6 +41,7 @@
             this.entireViewBtn = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.mapControl = new MiniGIS.Map();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -53,7 +58,7 @@
             this.entireViewBtn});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(782, 27);
+            this.toolStrip.Size = new System.Drawing.Size(1147, 27);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -114,7 +119,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 728);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(782, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1147, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -124,14 +129,37 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
+            // listView1
+            // 
+            this.listView1.CheckBoxes = true;
+            listViewItem1.Checked = true;
+            listViewItem1.StateImageIndex = 1;
+            listViewItem2.Checked = true;
+            listViewItem2.StateImageIndex = 1;
+            listViewItem3.Checked = true;
+            listViewItem3.StateImageIndex = 1;
+            listViewItem4.Checked = true;
+            listViewItem4.StateImageIndex = 1;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4});
+            this.listView1.Location = new System.Drawing.Point(824, 30);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(205, 217);
+            this.listView1.TabIndex = 3;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
+            // 
             // mapControl
             // 
-            this.mapControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mapControl.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mapControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mapControl.CurrentTool = MiniGIS.Tool.Select;
             this.mapControl.IsMouseDown = false;
-            this.mapControl.Location = new System.Drawing.Point(0, 30);
+            this.mapControl.Location = new System.Drawing.Point(8, 30);
             geoPoint1.X = 0D;
             geoPoint1.Y = 0D;
             this.mapControl.MapCenter = geoPoint1;
@@ -146,7 +174,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 753);
+            this.ClientSize = new System.Drawing.Size(1147, 753);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.mapControl);
@@ -175,6 +204,7 @@
         private System.Windows.Forms.ToolStripButton entireViewBtn;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

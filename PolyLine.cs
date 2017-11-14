@@ -67,6 +67,10 @@ namespace MiniGIS
             var lineWidth = LineStyle.Width;
             var lineColor = LineStyle.Color;
             var pen = new Pen(lineColor, lineWidth);
+            if(Selected)
+            {
+                pen.DashPattern = new float[] { 4.0f, 2.0f };
+            }
 
             var points = new System.Drawing.Point[CountNodes()];
             for(int i = 0; i < CountNodes(); ++i)
@@ -92,7 +96,7 @@ namespace MiniGIS
 
         public override bool IsInside(GEORect geoRect)
         {
-            for(int i = 0; i < CountNodes() - 2; ++i)
+            for(int i = 0; i < CountNodes() - 1; ++i)
             {
                 var line = new Line();
                 line.BeginPoint = Nodes[i];
