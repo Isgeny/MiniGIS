@@ -40,16 +40,29 @@
             this.zoomOutBtn = new System.Windows.Forms.ToolStripButton();
             this.entireViewBtn = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.listViewLayers = new System.Windows.Forms.ListView();
+            this.btnCalculate = new System.Windows.Forms.Button();
+            this.lblType = new System.Windows.Forms.Label();
+            this.lblPerimeter = new System.Windows.Forms.Label();
+            this.lblArea = new System.Windows.Forms.Label();
+            this.textBoxType = new System.Windows.Forms.TextBox();
+            this.textBoxPerimeter = new System.Windows.Forms.TextBox();
+            this.textBoxArea = new System.Windows.Forms.TextBox();
+            this.groupBoxLayers = new System.Windows.Forms.GroupBox();
+            this.groupBoxMap = new System.Windows.Forms.GroupBox();
+            this.groupBoxCalculation = new System.Windows.Forms.GroupBox();
             this.map = new MiniGIS.Map();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.groupBoxLayers.SuspendLayout();
+            this.groupBoxMap.SuspendLayout();
+            this.groupBoxCalculation.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
             // 
+            this.toolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectBtn,
@@ -59,9 +72,9 @@
             this.entireViewBtn});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(974, 27);
+            this.toolStrip.Size = new System.Drawing.Size(132, 27);
             this.toolStrip.TabIndex = 1;
-            this.toolStrip.Text = "toolStrip1";
+            this.toolStrip.Text = "toolStrip";
             // 
             // selectBtn
             // 
@@ -117,22 +130,22 @@
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 728);
+            this.toolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 767);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(974, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(940, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // toolStripStatusLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(143, 20);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
             // 
-            // listView1
+            // listViewLayers
             // 
-            this.listView1.CheckBoxes = true;
+            this.listViewLayers.CheckBoxes = true;
             listViewItem1.Checked = true;
             listViewItem1.StateImageIndex = 1;
             listViewItem2.Checked = true;
@@ -141,34 +154,120 @@
             listViewItem3.StateImageIndex = 1;
             listViewItem4.Checked = true;
             listViewItem4.StateImageIndex = 1;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            this.listViewLayers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2,
             listViewItem3,
             listViewItem4});
-            this.listView1.Location = new System.Drawing.Point(722, 47);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(205, 217);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.listViewLayers.Location = new System.Drawing.Point(6, 21);
+            this.listViewLayers.MultiSelect = false;
+            this.listViewLayers.Name = "listViewLayers";
+            this.listViewLayers.Size = new System.Drawing.Size(188, 199);
+            this.listViewLayers.TabIndex = 3;
+            this.listViewLayers.UseCompatibleStateImageBehavior = false;
+            this.listViewLayers.View = System.Windows.Forms.View.List;
             // 
-            // label1
+            // btnCalculate
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(719, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 17);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Layers:";
+            this.btnCalculate.Location = new System.Drawing.Point(6, 167);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(188, 35);
+            this.btnCalculate.TabIndex = 5;
+            this.btnCalculate.Text = "Calculate";
+            this.btnCalculate.UseVisualStyleBackColor = true;
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(35, 27);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(44, 17);
+            this.lblType.TabIndex = 6;
+            this.lblType.Text = "Type:";
+            // 
+            // lblPerimeter
+            // 
+            this.lblPerimeter.AutoSize = true;
+            this.lblPerimeter.Location = new System.Drawing.Point(6, 75);
+            this.lblPerimeter.Name = "lblPerimeter";
+            this.lblPerimeter.Size = new System.Drawing.Size(73, 17);
+            this.lblPerimeter.TabIndex = 7;
+            this.lblPerimeter.Text = "Perimeter:";
+            // 
+            // lblArea
+            // 
+            this.lblArea.AutoSize = true;
+            this.lblArea.Location = new System.Drawing.Point(37, 121);
+            this.lblArea.Name = "lblArea";
+            this.lblArea.Size = new System.Drawing.Size(42, 17);
+            this.lblArea.TabIndex = 8;
+            this.lblArea.Text = "Area:";
+            // 
+            // textBoxType
+            // 
+            this.textBoxType.Location = new System.Drawing.Point(85, 24);
+            this.textBoxType.Name = "textBoxType";
+            this.textBoxType.ReadOnly = true;
+            this.textBoxType.Size = new System.Drawing.Size(109, 22);
+            this.textBoxType.TabIndex = 9;
+            // 
+            // textBoxPerimeter
+            // 
+            this.textBoxPerimeter.Location = new System.Drawing.Point(85, 72);
+            this.textBoxPerimeter.Name = "textBoxPerimeter";
+            this.textBoxPerimeter.ReadOnly = true;
+            this.textBoxPerimeter.Size = new System.Drawing.Size(109, 22);
+            this.textBoxPerimeter.TabIndex = 10;
+            // 
+            // textBoxArea
+            // 
+            this.textBoxArea.Location = new System.Drawing.Point(85, 118);
+            this.textBoxArea.Name = "textBoxArea";
+            this.textBoxArea.ReadOnly = true;
+            this.textBoxArea.Size = new System.Drawing.Size(109, 22);
+            this.textBoxArea.TabIndex = 11;
+            // 
+            // groupBoxLayers
+            // 
+            this.groupBoxLayers.Controls.Add(this.listViewLayers);
+            this.groupBoxLayers.Location = new System.Drawing.Point(731, 30);
+            this.groupBoxLayers.Name = "groupBoxLayers";
+            this.groupBoxLayers.Size = new System.Drawing.Size(199, 229);
+            this.groupBoxLayers.TabIndex = 12;
+            this.groupBoxLayers.TabStop = false;
+            this.groupBoxLayers.Text = "Layers";
+            // 
+            // groupBoxMap
+            // 
+            this.groupBoxMap.Controls.Add(this.map);
+            this.groupBoxMap.Location = new System.Drawing.Point(12, 30);
+            this.groupBoxMap.Name = "groupBoxMap";
+            this.groupBoxMap.Size = new System.Drawing.Size(713, 726);
+            this.groupBoxMap.TabIndex = 13;
+            this.groupBoxMap.TabStop = false;
+            this.groupBoxMap.Text = "Map";
+            // 
+            // groupBoxCalculation
+            // 
+            this.groupBoxCalculation.Controls.Add(this.textBoxType);
+            this.groupBoxCalculation.Controls.Add(this.btnCalculate);
+            this.groupBoxCalculation.Controls.Add(this.lblType);
+            this.groupBoxCalculation.Controls.Add(this.textBoxArea);
+            this.groupBoxCalculation.Controls.Add(this.lblPerimeter);
+            this.groupBoxCalculation.Controls.Add(this.textBoxPerimeter);
+            this.groupBoxCalculation.Controls.Add(this.lblArea);
+            this.groupBoxCalculation.Location = new System.Drawing.Point(731, 265);
+            this.groupBoxCalculation.Name = "groupBoxCalculation";
+            this.groupBoxCalculation.Size = new System.Drawing.Size(199, 210);
+            this.groupBoxCalculation.TabIndex = 14;
+            this.groupBoxCalculation.TabStop = false;
+            this.groupBoxCalculation.Text = "Calculation";
             // 
             // map
             // 
-            this.map.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.map.CurrentTool = MiniGIS.Tool.Select;
             this.map.IsMouseDown = false;
-            this.map.Location = new System.Drawing.Point(0, 27);
+            this.map.Location = new System.Drawing.Point(6, 21);
             geoPoint1.X = 0D;
             geoPoint1.Y = 0D;
             this.map.MapCenter = geoPoint1;
@@ -183,12 +282,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(974, 753);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(940, 792);
+            this.Controls.Add(this.groupBoxCalculation);
+            this.Controls.Add(this.groupBoxMap);
+            this.Controls.Add(this.groupBoxLayers);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip);
-            this.Controls.Add(this.map);
             this.DoubleBuffered = true;
             this.Name = "Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -198,6 +297,10 @@
             this.toolStrip.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBoxLayers.ResumeLayout(false);
+            this.groupBoxMap.ResumeLayout(false);
+            this.groupBoxCalculation.ResumeLayout(false);
+            this.groupBoxCalculation.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,9 +316,18 @@
         private System.Windows.Forms.ToolStripButton zoomOutBtn;
         private System.Windows.Forms.ToolStripButton entireViewBtn;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ListView listViewLayers;
+        private System.Windows.Forms.Button btnCalculate;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.Label lblPerimeter;
+        private System.Windows.Forms.Label lblArea;
+        private System.Windows.Forms.TextBox textBoxType;
+        private System.Windows.Forms.TextBox textBoxPerimeter;
+        private System.Windows.Forms.TextBox textBoxArea;
+        private System.Windows.Forms.GroupBox groupBoxLayers;
+        private System.Windows.Forms.GroupBox groupBoxMap;
+        private System.Windows.Forms.GroupBox groupBoxCalculation;
     }
 }
 

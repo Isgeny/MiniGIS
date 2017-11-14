@@ -80,7 +80,12 @@ namespace MiniGIS
 
         private void mapControl_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "Map Center: " + map.MapCenter.X + " : " + map.MapCenter.Y + " | " + "Scale: " + map.MapScale + " | " +  e.X + " : " + e.Y + " | " + map.ScreenToMap(e.Location).X + " : " +  map.ScreenToMap(e.Location).Y + " | " + map.MapToScreen(map.ScreenToMap(e.Location)).X + " : " + map.MapToScreen(map.ScreenToMap(e.Location)).Y;
+            string mapCenter = "MapCenter: " + map.MapCenter.X.ToString("0.0") + " : " + map.MapCenter.Y.ToString("0.0");
+            string mapScale = "MapScale: " + map.MapScale.ToString("0.0");
+            string screenCoord1 = "ScreenCoords1: " + e.X.ToString("0.0") + " : " + e.Y.ToString("0.0");
+            string mapCoord = "MapCoords: " + map.ScreenToMap(e.Location).X.ToString("0.0") + " : " + map.ScreenToMap(e.Location).Y.ToString("0.0");
+            string screenCoord2 = "ScreenCoords2: " + map.MapToScreen(map.ScreenToMap(e.Location)).X.ToString("0.0") + " : " + map.MapToScreen(map.ScreenToMap(e.Location)).Y.ToString("0.0");
+            toolStripStatusLabel.Text = mapCenter + " | " + mapScale + " | " + screenCoord1 + " | " + screenCoord2 + " | " + mapCoord;
         }
 
         private void entireViewBtn_Click(object sender, EventArgs e)

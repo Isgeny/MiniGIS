@@ -229,7 +229,6 @@ namespace MiniGIS
                     {
                         MapCenter = ScreenToMap(MouseDownPosition);
                         MapScale *= 2;
-                        Cursor = Cursors.Cross;
                     }
                     IsMouseDown = false;
                     Refresh();
