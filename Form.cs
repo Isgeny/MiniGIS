@@ -52,9 +52,9 @@ namespace MiniGIS
             layer1.AddMapObject(pointY);
             layer1.AddMapObject(polyLine);
             layer1.AddMapObject(polygon);
-            mapControl.AddLayer(layer1);
+            map.AddLayer(layer1);
 
-            mapControl.CurrentTool = Tool.Select;
+            map.CurrentTool = Tool.Select;
             CurrentToolBtn = selectBtn;
             CurrentToolBtn.Checked = true;
         }
@@ -66,7 +66,7 @@ namespace MiniGIS
             Tool currentTool;
             if(Enum.TryParse(toolBtnType, out currentTool))
             {
-                mapControl.CurrentTool = currentTool;
+                map.CurrentTool = currentTool;
                 CurrentToolBtn.Checked = false;
                 CurrentToolBtn = btn;
                 CurrentToolBtn.Checked = true;
@@ -80,25 +80,25 @@ namespace MiniGIS
 
         private void mapControl_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "Map Center: " + mapControl.MapCenter.X + " : " + mapControl.MapCenter.Y + " | " + "Scale: " + mapControl.MapScale + " | " +  e.X + " : " + e.Y + " | " + mapControl.ScreenToMap(e.Location).X + " : " +  mapControl.ScreenToMap(e.Location).Y + " | " + mapControl.MapToScreen(mapControl.ScreenToMap(e.Location)).X + " : " + mapControl.MapToScreen(mapControl.ScreenToMap(e.Location)).Y;
+            toolStripStatusLabel1.Text = "Map Center: " + map.MapCenter.X + " : " + map.MapCenter.Y + " | " + "Scale: " + map.MapScale + " | " +  e.X + " : " + e.Y + " | " + map.ScreenToMap(e.Location).X + " : " +  map.ScreenToMap(e.Location).Y + " | " + map.MapToScreen(map.ScreenToMap(e.Location)).X + " : " + map.MapToScreen(map.ScreenToMap(e.Location)).Y;
         }
 
         private void entireViewBtn_Click(object sender, EventArgs e)
         {
-            var bounds = mapControl.GEOBounds;
+            var bounds = map.GEOBounds;
             double Dx = Math.Abs(bounds.XMax - bounds.XMin);
             double Dy = Math.Abs(bounds.YMax - bounds.YMin);
             GEOPoint newCenter = new GEOPoint((bounds.XMin + bounds.XMax) / 2.0, (bounds.YMin + bounds.YMax) / 2.0);
-            mapControl.MapCenter = newCenter;
-            if(Width / Dx < Height / Dy)
+            map.MapCenter = newCenter;
+            if(map.Width / Dx < map.Height / Dy)
             {
-                mapControl.MapScale = Width / Dx - 0.02;
+                map.MapScale = map.Width / Dx - 0.005;
             }
             else
             {
-                mapControl.MapScale = Height / Dy - 0.02;
+                map.MapScale = map.Height / Dy - 0.005;
             }
-            mapControl.Refresh();
+            map.Refresh();
         }
     }
 }
