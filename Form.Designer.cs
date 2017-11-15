@@ -32,6 +32,7 @@
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Lines");
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("PolyLines");
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Polygons");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Axis");
             MiniGIS.GEOPoint geoPoint1 = new MiniGIS.GEOPoint();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.selectBtn = new System.Windows.Forms.ToolStripButton();
@@ -154,11 +155,14 @@
             listViewItem3.StateImageIndex = 1;
             listViewItem4.Checked = true;
             listViewItem4.StateImageIndex = 1;
+            listViewItem5.Checked = true;
+            listViewItem5.StateImageIndex = 1;
             this.listViewLayers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2,
             listViewItem3,
-            listViewItem4});
+            listViewItem4,
+            listViewItem5});
             this.listViewLayers.Location = new System.Drawing.Point(6, 21);
             this.listViewLayers.MultiSelect = false;
             this.listViewLayers.Name = "listViewLayers";

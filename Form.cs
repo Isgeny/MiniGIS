@@ -18,41 +18,88 @@ namespace MiniGIS
             InitializeComponent();
 
             Line OX = new Line();
-            OX.BeginPoint = new GEOPoint(-map.Width / 2, 0);
-            OX.EndPoint = new GEOPoint(map.Width / 2, 0);
+            OX.BeginPoint = new GEOPoint(-map.Width / 2.0, 0.0);
+            OX.EndPoint = new GEOPoint(map.Width / 2.0, 0.0);
 
             Line OY = new Line();
-            OY.BeginPoint = new GEOPoint(0, map.Height / 2);
-            OY.EndPoint = new GEOPoint(0, -map.Height / 2);
+            OY.BeginPoint = new GEOPoint(0.0, map.Height / 2.0);
+            OY.EndPoint = new GEOPoint(0.0, -map.Height / 2.0);
 
             var pointX = new Point();
             pointX.Style = new PointStyle("Arial", Convert.ToByte('X'), 14, System.Drawing.Color.Black);
-            pointX.Position = new GEOPoint(map.Width / 2 - 20, pointX.Style.SymbolSize);
+            pointX.Position = new GEOPoint(map.Width / 2.0 - 20.0, pointX.Style.SymbolSize);
 
             var pointY = new Point();
             pointY.Style = new PointStyle("Arial", Convert.ToByte('Y'), 14, System.Drawing.Color.Black);
-            pointY.Position = new GEOPoint(pointX.Style.SymbolSize, map.Height / 2 - 20);
+            pointY.Position = new GEOPoint(pointX.Style.SymbolSize, map.Height / 2.0 - 20.0);
 
-            var polyLine = new PolyLine();
-            polyLine.AddNode(new GEOPoint(300, 200));
-            polyLine.AddNode(new GEOPoint(700, 100));
-            polyLine.AddNode(new GEOPoint(200, -500));
-            polyLine.AddNode(new GEOPoint(-800, 75));
+            var layerAxis = new Layer();
+            layerAxis.AddMapObject(OX);
+            layerAxis.AddMapObject(OY);
+            layerAxis.AddMapObject(pointX);
+            layerAxis.AddMapObject(pointY);
+            map.AddLayer(layerAxis);
 
-            var polygon = new Polygon();
-            polygon.AddNode(new GEOPoint(50, 0));
-            polygon.AddNode(new GEOPoint(200, 0));
-            polygon.AddNode(new GEOPoint(200, 100));
-            polygon.AddNode(new GEOPoint(50, 100));
+            var polygon1 = new Polygon();
+            polygon1.AddNode(new GEOPoint(50.0, -50.0));
+            polygon1.AddNode(new GEOPoint(200.0, -50.0));
+            polygon1.AddNode(new GEOPoint(50.0, -150.0));
 
-            var layer1 = new Layer();
-            layer1.AddMapObject(OX);
-            layer1.AddMapObject(OY);
-            layer1.AddMapObject(pointX);
-            layer1.AddMapObject(pointY);
-            layer1.AddMapObject(polyLine);
-            layer1.AddMapObject(polygon);
-            map.AddLayer(layer1);
+            var polygon2 = new Polygon();
+            polygon2.PolygonStyle.Color = System.Drawing.Color.Gold;
+            polygon2.AddNode(new GEOPoint(240.0, -60.0));
+            polygon2.AddNode(new GEOPoint(330.0, -35.0));
+            polygon2.AddNode(new GEOPoint(310.0, -330.0));
+            polygon2.AddNode(new GEOPoint(250.0, -250.0));
+            polygon2.AddNode(new GEOPoint(200.0, -345.0));
+            polygon2.AddNode(new GEOPoint(70.0, -300.0));
+            polygon2.AddNode(new GEOPoint(90.0, -230.0));
+            polygon2.AddNode(new GEOPoint(270.0, -210.0));
+            polygon2.AddNode(new GEOPoint(320.0, -95.0));
+
+            var layerPolygons = new Layer();
+            layerPolygons.AddMapObject(polygon1);
+            layerPolygons.AddMapObject(polygon2);
+            map.AddLayer(layerPolygons);
+
+            var polyline1 = new PolyLine();
+            polyline1.LineStyle.Color = System.Drawing.Color.Blue;
+            polyline1.AddNode(new GEOPoint(-350.0, -200.0));
+            polyline1.AddNode(new GEOPoint(-280.0, -20.0));
+            polyline1.AddNode(new GEOPoint(-200.0, -150.0));
+            polyline1.AddNode(new GEOPoint(-100.0, -30.0));
+            polyline1.AddNode(new GEOPoint(-10.0, -200.0));
+            polyline1.AddNode(new GEOPoint(-330.0, -300.0));
+
+            var polyline2 = new PolyLine();
+            polyline2.LineStyle.Color = System.Drawing.Color.Brown;
+            polyline2.LineStyle.Width = 5.0f;
+            polyline2.AddNode(new GEOPoint(-50.0, -300.0));
+            polyline2.AddNode(new GEOPoint(-340.0, -80.0));
+            polyline2.AddNode(new GEOPoint(-20.0, -80.0));
+
+            var layerPolyLines = new Layer();
+            layerPolyLines.AddMapObject(polyline1);
+            layerPolyLines.AddMapObject(polyline2);
+            map.AddLayer(layerPolyLines);
+
+            var line1 = new Line(new GEOPoint(-150.0, 300.0), new GEOPoint(-200.0, 50.0), new LineStyle(System.Drawing.Color.Green, 2.0f));
+            var line2 = new Line(new GEOPoint(-100.0, 110.0), new GEOPoint(-300.0, 300.0), new LineStyle(System.Drawing.Color.Red, 4.0f));
+
+            var layerLines = new Layer();
+            layerLines.AddMapObject(line1);
+            layerLines.AddMapObject(line2);
+            map.AddLayer(layerLines);
+
+            var pointPlane = new Point(new GEOPoint(100.0, 100.0), new PointStyle("Wingdings", 0x51, 30, System.Drawing.Color.Gray));
+            var pointBomb = new Point(new GEOPoint(300.0, 200.0), new PointStyle("Wingdings", 0x4D, 20, System.Drawing.Color.Black));
+            var pointSun = new Point(new GEOPoint(150.0, 300.0), new PointStyle("Wingdings", 0x52, 40, System.Drawing.Color.Orange));
+
+            var layerPoints = new Layer();
+            layerPoints.AddMapObject(pointPlane);
+            layerPoints.AddMapObject(pointBomb);
+            layerPoints.AddMapObject(pointSun);
+            map.AddLayer(layerPoints);
 
             map.CurrentTool = Tool.Select;
             CurrentToolBtn = selectBtn;

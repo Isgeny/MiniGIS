@@ -22,7 +22,7 @@ namespace MiniGIS
         public System.Drawing.Point MouseDownPosition { get; set; }
         private const int shake = 5;
         private Layer cosmeticLayer;
-        public List<MapObject> SelectedObjects { get; set; }
+        public List<MapObject> SelectedObjects { get; }
 
         public Map()
         {
