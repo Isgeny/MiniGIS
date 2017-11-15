@@ -40,6 +40,12 @@ namespace MiniGIS
             // Разбиваем прямоугольник на 4 отрезка
             List<Line> rectLines = GEORectToLines(geoRect);
 
+            // Проверяем если точка отрезка находится внутри прямоугольника
+            if(Contains(geoRect, line.BeginPoint))
+            {
+                return true;
+            }
+
             // Проверяем пересечение каждой стороны прямоугольника с исходным отрезком
             foreach(var rectLine in rectLines)
             {
@@ -47,20 +53,13 @@ namespace MiniGIS
                 {
                     return true;
                 }
-                // взаимное расположение двух отрезков определяется с помощью векторных произведений
-                // рассматривается 4 векторных произведения для 2 отрезков
-                // если векторы положительно ориентированы, то векторное произведение положительно, иначе отрицательно
-                // для того, чтобы выполнялось пересечение отрезков необходимо, чтобы векторные произведения имели противоположные знаки
-                //double v1 = (line.EndPoint.X - line.BeginPoint.X) * (rectLine.BeginPoint.Y - line.BeginPoint.Y) - (line.EndPoint.Y - line.BeginPoint.Y) * (rectLine.BeginPoint.X - line.BeginPoint.X);
-                //double v2 = (line.EndPoint.X - line.BeginPoint.X) * (rectLine.EndPoint.Y - line.BeginPoint.Y) - (line.EndPoint.Y - line.BeginPoint.Y) * (rectLine.EndPoint.X - line.BeginPoint.X);
-                //double v3 = (rectLine.EndPoint.X - rectLine.BeginPoint.X) * (line.BeginPoint.Y - rectLine.BeginPoint.Y) - (rectLine.EndPoint.Y - rectLine.BeginPoint.Y) * (line.BeginPoint.X - rectLine.BeginPoint.X);
-                //double v4 = (rectLine.EndPoint.X - rectLine.BeginPoint.X) * (line.EndPoint.Y - rectLine.BeginPoint.Y) - (rectLine.EndPoint.Y - rectLine.BeginPoint.Y) * (line.EndPoint.X - rectLine.BeginPoint.X);
-                //if(v1 * v2 < 0 && v3 * v4 < 0)
-                //{
-                //    return true;
-                //}
             }
             return false;
+        }
+
+        public static bool Contains(GEORect rect, GEOPoint point)
+        {
+            return (rect.XMin < point.X && rect.XMax > point.X && rect.YMin < point.Y && rect.YMax > point.Y);
         }
 
         // Преобразует прямоугольник в список из 4х отрезков - его сторон
