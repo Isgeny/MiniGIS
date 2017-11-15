@@ -171,6 +171,7 @@
             this.listViewLayers.TabIndex = 3;
             this.listViewLayers.UseCompatibleStateImageBehavior = false;
             this.listViewLayers.View = System.Windows.Forms.View.List;
+            this.listViewLayers.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewLayers_ItemChecked);
             this.listViewLayers.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLayers_ItemDrag);
             this.listViewLayers.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLayers_DragEnter);
             this.listViewLayers.DragOver += new System.Windows.Forms.DragEventHandler(this.listViewLayers_DragOver);

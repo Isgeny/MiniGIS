@@ -34,7 +34,7 @@ namespace MiniGIS
             pointY.Style = new PointStyle("Arial", Convert.ToByte('Y'), 14, System.Drawing.Color.Black);
             pointY.Position = new GEOPoint(pointX.Style.SymbolSize, map.Height / 2.0 - 20.0);
 
-            var layerAxis = new Layer();
+            var layerAxis = new Layer("Axis");
             layerAxis.AddMapObject(OX);
             layerAxis.AddMapObject(OY);
             layerAxis.AddMapObject(pointX);
@@ -58,7 +58,7 @@ namespace MiniGIS
             polygon2.AddNode(new GEOPoint(270.0, -210.0));
             polygon2.AddNode(new GEOPoint(320.0, -95.0));
 
-            var layerPolygons = new Layer();
+            var layerPolygons = new Layer("Polygons");
             layerPolygons.AddMapObject(polygon1);
             layerPolygons.AddMapObject(polygon2);
             map.AddLayer(layerPolygons);
@@ -79,7 +79,7 @@ namespace MiniGIS
             polyline2.AddNode(new GEOPoint(-340.0, -80.0));
             polyline2.AddNode(new GEOPoint(-20.0, -80.0));
 
-            var layerPolyLines = new Layer();
+            var layerPolyLines = new Layer("PolyLines");
             layerPolyLines.AddMapObject(polyline1);
             layerPolyLines.AddMapObject(polyline2);
             map.AddLayer(layerPolyLines);
@@ -87,7 +87,7 @@ namespace MiniGIS
             var line1 = new Line(new GEOPoint(-150.0, 300.0), new GEOPoint(-200.0, 50.0), new LineStyle(System.Drawing.Color.Green, 2.0f));
             var line2 = new Line(new GEOPoint(-100.0, 110.0), new GEOPoint(-300.0, 300.0), new LineStyle(System.Drawing.Color.Red, 4.0f));
 
-            var layerLines = new Layer();
+            var layerLines = new Layer("Lines");
             layerLines.AddMapObject(line1);
             layerLines.AddMapObject(line2);
             map.AddLayer(layerLines);
@@ -96,7 +96,7 @@ namespace MiniGIS
             var pointBomb = new Point(new GEOPoint(300.0, 200.0), new PointStyle("Wingdings", 0x4D, 20, System.Drawing.Color.Black));
             var pointSun = new Point(new GEOPoint(150.0, 300.0), new PointStyle("Wingdings", 0x52, 40, System.Drawing.Color.Orange));
 
-            var layerPoints = new Layer();
+            var layerPoints = new Layer("Points");
             layerPoints.AddMapObject(pointPlane);
             layerPoints.AddMapObject(pointBomb);
             layerPoints.AddMapObject(pointSun);
@@ -202,6 +202,13 @@ namespace MiniGIS
                 listViewLayers.Items.Remove(selectedItem);
                 listViewLayers.Items.Insert(itemDragIndex, selectedItem);
             }
+        }
+
+        private void listViewLayers_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            int itemIndex = e.Item.Index;
+            map.Layers[map.CountLayers() - itemIndex - 1].Visible = e.Item.Checked;
+            map.Refresh();
         }
     }
 }

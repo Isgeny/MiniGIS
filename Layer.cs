@@ -13,9 +13,9 @@ namespace MiniGIS
         // Прямоугольная область в которую вписаны все мап объекты
         public GEORect GEOBounds { get; set; }
 
-        public Layer()
+        public Layer(string name)
         {
-            Name = "";
+            Name = name;
             Visible = true;
             MapObjects = new List<MapObject>();
             GEOBounds = new GEORect(0.0, 0.0, 0.0, 0.0);

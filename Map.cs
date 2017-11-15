@@ -33,7 +33,7 @@ namespace MiniGIS
             IsMouseDown = false;
             SelectedObjects = new List<MapObject>();
 
-            cosmeticLayer = new Layer();
+            cosmeticLayer = new Layer("Cosmetic");
             cosmeticLayer.Visible = false;
             AddLayer(cosmeticLayer);
         }
