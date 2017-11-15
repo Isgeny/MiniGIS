@@ -57,9 +57,16 @@ namespace MiniGIS
             return false;
         }
 
+        // Находится ли точка внутри прямоугольника
         public static bool Contains(GEORect rect, GEOPoint point)
         {
             return (rect.XMin < point.X && rect.XMax > point.X && rect.YMin < point.Y && rect.YMax > point.Y);
+        }
+
+        // Находится ли полностью прямоугольник rect1 внутри прямоугольника rect2
+        public static bool Contains(GEORect rect1, GEORect rect2)
+        {
+            return (rect2.XMin < rect1.XMin && rect2.XMax > rect1.XMax && rect2.YMin < rect1.YMin && rect2.YMax > rect1.YMax);
         }
 
         // Преобразует прямоугольник в список из 4х отрезков - его сторон

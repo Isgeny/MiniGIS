@@ -49,6 +49,13 @@ namespace MiniGIS
         public override bool IsInside(GEORect geoRect)
         {
             var bounds = GetBounds();
+
+            // Проверяем полное вхождение прямоугольной области полигона в выделенную область
+            if(GEORect.IsIntersect(bounds, geoRect))
+            {
+                return true;
+            }
+
             var geoRectCenter = new GEOPoint((geoRect.XMin + Math.Abs(geoRect.XMin - geoRect.XMax) / 2.0), geoRect.YMin + Math.Abs(geoRect.YMin - geoRect.YMax) / 2.0);
             var geoPointObject = new GEOPoint(bounds.XMax + 1.0, geoRectCenter.Y);
 
