@@ -69,5 +69,15 @@ namespace MiniGIS
             }
             return false;
         }
+
+        public override double Perimeter()
+        {
+            return (Math.Sqrt(Math.Pow(EndPoint.X - BeginPoint.X, 2) + Math.Pow(EndPoint.Y - BeginPoint.Y, 2)));
+        }
+
+        public override double Area()
+        {
+            return 0.0;
+        }
     }
 }

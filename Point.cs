@@ -61,5 +61,15 @@ namespace MiniGIS
             var pointRect = new GEORect(Position.X, Position.X + symbolSize.Width, Position.Y, Position.Y + symbolSize.Height);
             return GEORect.IsIntersect(pointRect, geoRect);
         }
+
+        public override double Perimeter()
+        {
+            return 0.0;
+        }
+
+        public override double Area()
+        {
+            return 0.0;
+        }
     }
 }

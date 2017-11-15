@@ -111,5 +111,29 @@ namespace MiniGIS
             }
             return !(count % 2 == 0);
         }
+
+        public override double Perimeter()
+        {
+            double perimeter = base.Perimeter();
+            int countNodes = CountNodes();
+            var line = new Line();
+            line.BeginPoint = Nodes[0];
+            line.EndPoint = Nodes[countNodes - 1];
+            perimeter += line.Perimeter();
+            return perimeter;
+        }
+
+        public override double Area()
+        {
+            double area = 0.0;
+            int n = CountNodes();
+            for(int i = 0; i < n - 1; ++i)
+            {
+                area += Nodes[i].X * Nodes[i + 1].Y - Nodes[i + 1].X * Nodes[i].Y;
+            }
+            area += Nodes[n - 1].X * Nodes[0].Y;
+            area -= Nodes[0].X * Nodes[n - 1].Y;
+            return Math.Abs(area) / 2.0;
+        }
     }
 }

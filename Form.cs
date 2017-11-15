@@ -152,5 +152,21 @@ namespace MiniGIS
             }
             map.Refresh();
         }
+
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            textBoxType.Text = "";
+            textBoxPerimeter.Text = "";
+            textBoxArea.Text = "";
+
+            var selectedObjects = map.SelectedObjects;
+            if(selectedObjects.Count == 1)
+            {
+                var mapObject = selectedObjects[0];
+                textBoxType.Text = mapObject.Type.ToString();
+                textBoxPerimeter.Text = mapObject.Perimeter().ToString("0.0");
+                textBoxArea.Text = mapObject.Area().ToString("0.0");
+            }
+        }
     }
 }

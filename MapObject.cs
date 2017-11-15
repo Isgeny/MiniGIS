@@ -37,5 +37,11 @@ namespace MiniGIS
 
         // Проверка вхождения прямоугольника в прямоугольник текущего объекта
         public abstract bool IsInside(GEORect geoRect);
+
+        // Нахождение периметра
+        public abstract double Perimeter();
+
+        // Нахождение площади
+        public abstract double Area();
     }
 }
