@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Points");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Lines");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Axis");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Polygons");
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("PolyLines");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Polygons");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Axis");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Lines");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Points");
             MiniGIS.GEOPoint geoPoint1 = new MiniGIS.GEOPoint();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.selectBtn = new System.Windows.Forms.ToolStripButton();
@@ -175,6 +175,7 @@
             this.listViewLayers.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLayers_ItemDrag);
             this.listViewLayers.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLayers_DragEnter);
             this.listViewLayers.DragOver += new System.Windows.Forms.DragEventHandler(this.listViewLayers_DragOver);
+            this.listViewLayers.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listViewLayers_KeyUp);
             // 
             // btnCalculate
             // 

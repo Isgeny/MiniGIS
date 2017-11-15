@@ -27,11 +27,11 @@ namespace MiniGIS
             OY.EndPoint = new GEOPoint(0.0, -map.Height / 2.0);
 
             var pointX = new Point();
-            pointX.Style = new PointStyle("Arial", Convert.ToByte('X'), 14, System.Drawing.Color.Black);
+            pointX.Style = new PointStyle("Arial", Convert.ToByte('X'), 14, Color.Black);
             pointX.Position = new GEOPoint(map.Width / 2.0 - 20.0, pointX.Style.SymbolSize);
 
             var pointY = new Point();
-            pointY.Style = new PointStyle("Arial", Convert.ToByte('Y'), 14, System.Drawing.Color.Black);
+            pointY.Style = new PointStyle("Arial", Convert.ToByte('Y'), 14, Color.Black);
             pointY.Position = new GEOPoint(pointX.Style.SymbolSize, map.Height / 2.0 - 20.0);
 
             var layerAxis = new Layer("Axis");
@@ -42,12 +42,12 @@ namespace MiniGIS
             map.AddLayer(layerAxis);
 
             var polygon1 = new Polygon();
-            polygon1.AddNode(new GEOPoint(10.0, -10.0));
-            polygon1.AddNode(new GEOPoint(200.0, -10.0));
-            polygon1.AddNode(new GEOPoint(10.0, -150.0));
+            polygon1.AddNode(new GEOPoint(50.0, -50.0));
+            polygon1.AddNode(new GEOPoint(200.0, -50.0));
+            polygon1.AddNode(new GEOPoint(50.0, -150.0));
 
             var polygon2 = new Polygon();
-            polygon2.PolygonStyle.Color = System.Drawing.Color.Gold;
+            polygon2.PolygonStyle.Color = Color.Gold;
             polygon2.AddNode(new GEOPoint(240.0, -60.0));
             polygon2.AddNode(new GEOPoint(330.0, -35.0));
             polygon2.AddNode(new GEOPoint(310.0, -330.0));
@@ -58,13 +58,21 @@ namespace MiniGIS
             polygon2.AddNode(new GEOPoint(270.0, -210.0));
             polygon2.AddNode(new GEOPoint(320.0, -95.0));
 
+            var polygon3 = new Polygon();
+            polygon3.PolygonStyle.Color = Color.Lime;
+            polygon3.AddNode(new GEOPoint(20.0, 20.0));
+            polygon3.AddNode(new GEOPoint(-20.0, 20.0));
+            polygon3.AddNode(new GEOPoint(-20.0, -20.0));
+            polygon3.AddNode(new GEOPoint(20.0, -20.0));
+
             var layerPolygons = new Layer("Polygons");
             layerPolygons.AddMapObject(polygon1);
             layerPolygons.AddMapObject(polygon2);
+            layerPolygons.AddMapObject(polygon3);
             map.AddLayer(layerPolygons);
 
             var polyline1 = new PolyLine();
-            polyline1.LineStyle.Color = System.Drawing.Color.Blue;
+            polyline1.LineStyle.Color = Color.Blue;
             polyline1.AddNode(new GEOPoint(-350.0, -200.0));
             polyline1.AddNode(new GEOPoint(-280.0, -20.0));
             polyline1.AddNode(new GEOPoint(-200.0, -150.0));
@@ -73,40 +81,54 @@ namespace MiniGIS
             polyline1.AddNode(new GEOPoint(-330.0, -300.0));
 
             var polyline2 = new PolyLine();
-            polyline2.LineStyle.Color = System.Drawing.Color.Brown;
+            polyline2.LineStyle.Color = Color.Brown;
             polyline2.LineStyle.Width = 5.0f;
             polyline2.AddNode(new GEOPoint(-50.0, -300.0));
             polyline2.AddNode(new GEOPoint(-340.0, -80.0));
             polyline2.AddNode(new GEOPoint(-20.0, -80.0));
 
+            var polyline3 = new PolyLine();
+            polyline3.LineStyle.Color = Color.Magenta;
+            polyline3.LineStyle.Width = 2.0f;
+            polyline3.AddNode(new GEOPoint(0.0, 20.0));
+            polyline3.AddNode(new GEOPoint(-20.0, 0.0));
+            polyline3.AddNode(new GEOPoint(0.0, -20.0));
+            polyline3.AddNode(new GEOPoint(20.0, 0.0));
+            polyline3.AddNode(new GEOPoint(0.0, 20.0));
+
             var layerPolyLines = new Layer("PolyLines");
             layerPolyLines.AddMapObject(polyline1);
             layerPolyLines.AddMapObject(polyline2);
+            layerPolyLines.AddMapObject(polyline3);
             map.AddLayer(layerPolyLines);
 
-            var line1 = new Line(new GEOPoint(-150.0, 300.0), new GEOPoint(-200.0, 50.0), new LineStyle(System.Drawing.Color.Green, 2.0f));
-            var line2 = new Line(new GEOPoint(-100.0, 110.0), new GEOPoint(-300.0, 300.0), new LineStyle(System.Drawing.Color.Red, 4.0f));
+            var line1 = new Line(new GEOPoint(-150.0, 300.0), new GEOPoint(-200.0, 50.0), new LineStyle(Color.Green, 2.0f));
+            var line2 = new Line(new GEOPoint(-100.0, 110.0), new GEOPoint(-300.0, 300.0), new LineStyle(Color.Red, 4.0f));
+            var line3 = new Line(new GEOPoint(-30.0, 30.0), new GEOPoint(30.0, -30.0), new LineStyle(Color.OrangeRed, 4.0f));
 
             var layerLines = new Layer("Lines");
             layerLines.AddMapObject(line1);
             layerLines.AddMapObject(line2);
+            layerLines.AddMapObject(line3);
             map.AddLayer(layerLines);
 
-            var pointPlane = new Point(new GEOPoint(100.0, 100.0), new PointStyle("Wingdings", 0x51, 30, System.Drawing.Color.Gray));
-            var pointBomb = new Point(new GEOPoint(300.0, 200.0), new PointStyle("Wingdings", 0x4D, 20, System.Drawing.Color.Black));
-            var pointSun = new Point(new GEOPoint(150.0, 300.0), new PointStyle("Wingdings", 0x52, 40, System.Drawing.Color.Orange));
+            var pointPlane = new Point(new GEOPoint(100.0, 100.0), new PointStyle("Wingdings", 0x51, 30, Color.Gray));
+            var pointBomb = new Point(new GEOPoint(300.0, 200.0), new PointStyle("Wingdings", 0x4D, 20, Color.Black));
+            var pointSun = new Point(new GEOPoint(150.0, 300.0), new PointStyle("Wingdings", 0x52, 40, Color.Orange));
+            var pointInYan = new Point(new GEOPoint(0.0, -2.0), new PointStyle("Wingdings", 0x5B, 25, Color.Black));
 
             var layerPoints = new Layer("Points");
             layerPoints.AddMapObject(pointPlane);
             layerPoints.AddMapObject(pointBomb);
             layerPoints.AddMapObject(pointSun);
+            layerPoints.AddMapObject(pointInYan);
             map.AddLayer(layerPoints);
 
             map.CurrentTool = Tool.Select;
             CurrentToolBtn = selectBtn;
             CurrentToolBtn.Checked = true;
 
-            listViewLayers.InsertionMark.Color = System.Drawing.Color.Black;
+            listViewLayers.InsertionMark.Color = Color.Black;
         }
 
         private void OnToolStripBtnClicked(object sender, EventArgs e)
@@ -201,14 +223,27 @@ namespace MiniGIS
             {
                 listViewLayers.Items.Remove(selectedItem);
                 listViewLayers.Items.Insert(itemDragIndex, selectedItem);
+                map.SwapLayers(itemDragIndex, selectedItemIndex);
             }
+            map.Refresh();
         }
 
         private void listViewLayers_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             int itemIndex = e.Item.Index;
-            map.Layers[map.CountLayers() - itemIndex - 1].Visible = e.Item.Checked;
+            map.Layers[itemIndex].Visible = e.Item.Checked;
             map.Refresh();
+        }
+
+        private void listViewLayers_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(listViewLayers.SelectedItems.Count != 0 && e.KeyCode == Keys.Delete)
+            {
+                int itemIndex = listViewLayers.SelectedItems[0].Index;
+                map.RemoveLayer(itemIndex);
+                listViewLayers.Items.RemoveAt(itemIndex);
+                map.Refresh();
+            }
         }
     }
 }

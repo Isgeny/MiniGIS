@@ -35,7 +35,7 @@ namespace MiniGIS
 
             cosmeticLayer = new Layer("Cosmetic");
             cosmeticLayer.Visible = false;
-            AddLayer(cosmeticLayer);
+            cosmeticLayer.Map = this;
         }
 
         public GEORect GEOBounds
@@ -56,11 +56,12 @@ namespace MiniGIS
 
         private void Map_Paint(object sender, PaintEventArgs e)
         {
-            foreach(var layer in Layers)
+            int countLayers = CountLayers();
+            for(int i = countLayers - 1; i >= 0; --i)
             {
-                if(layer.Visible)
+                if(Layers[i].Visible)
                 {
-                    layer.Draw(e);
+                    Layers[i].Draw(e);
                 }
             }
             cosmeticLayer.Draw(e);
@@ -95,14 +96,21 @@ namespace MiniGIS
             Layers.Insert(index, layer);
         }
 
-        public void RemoveLayer(Layer layer)
+        public void RemoveLayer(int index)
         {
-            Layers.Remove(layer);
+            Layers.RemoveAt(index);
         }
 
         public int CountLayers()
         {
             return Layers.Count;
+        }
+
+        public void SwapLayers(int layerIndex1, int layerIndex2)
+        {
+            Layer temp = Layers[layerIndex1];
+            Layers[layerIndex1] = Layers[layerIndex2];
+            Layers[layerIndex2] = temp;
         }
 
         private void Map_MouseDown(object sender, MouseEventArgs e)
@@ -294,7 +302,7 @@ namespace MiniGIS
 
         private MapObject FindObject(GEORect searchRect)
         {
-            for(int i = Layers.Count - 1; i > 0; --i)
+            for(int i = Layers.Count - 1; i >= 0; --i)
             {
                 var layer = Layers[i];
                 if(layer.Visible)
@@ -312,7 +320,7 @@ namespace MiniGIS
         private List<MapObject> FindMapObjects(GEORect searchRect)
         {
             var mapObjects = new List<MapObject>();
-            for(int i = Layers.Count - 1; i > 0; --i)
+            for(int i = Layers.Count - 1; i >= 0; --i)
             {
                 var layer = Layers[i];
                 if(layer.Visible)
