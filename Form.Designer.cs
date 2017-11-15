@@ -52,8 +52,8 @@
             this.textBoxArea = new System.Windows.Forms.TextBox();
             this.groupBoxLayers = new System.Windows.Forms.GroupBox();
             this.groupBoxMap = new System.Windows.Forms.GroupBox();
-            this.map = new MiniGIS.Map();
             this.groupBoxCalculation = new System.Windows.Forms.GroupBox();
+            this.map = new MiniGIS.Map();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBoxLayers.SuspendLayout();
@@ -146,6 +146,7 @@
             // 
             // listViewLayers
             // 
+            this.listViewLayers.AllowDrop = true;
             this.listViewLayers.CheckBoxes = true;
             listViewItem1.Checked = true;
             listViewItem1.StateImageIndex = 1;
@@ -170,6 +171,9 @@
             this.listViewLayers.TabIndex = 3;
             this.listViewLayers.UseCompatibleStateImageBehavior = false;
             this.listViewLayers.View = System.Windows.Forms.View.List;
+            this.listViewLayers.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLayers_ItemDrag);
+            this.listViewLayers.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLayers_DragEnter);
+            this.listViewLayers.DragOver += new System.Windows.Forms.DragEventHandler(this.listViewLayers_DragOver);
             // 
             // btnCalculate
             // 
@@ -252,21 +256,6 @@
             this.groupBoxMap.TabStop = false;
             this.groupBoxMap.Text = "Map";
             // 
-            // map
-            // 
-            this.map.CurrentTool = MiniGIS.Tool.Select;
-            this.map.IsMouseDown = false;
-            this.map.Location = new System.Drawing.Point(6, 21);
-            geoPoint1.X = 0D;
-            geoPoint1.Y = 0D;
-            this.map.MapCenter = geoPoint1;
-            this.map.MapScale = 1D;
-            this.map.MouseDownPosition = new System.Drawing.Point(0, 0);
-            this.map.Name = "map";
-            this.map.Size = new System.Drawing.Size(700, 700);
-            this.map.TabIndex = 0;
-            this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapControl_MouseMove);
-            // 
             // groupBoxCalculation
             // 
             this.groupBoxCalculation.Controls.Add(this.textBoxType);
@@ -282,6 +271,21 @@
             this.groupBoxCalculation.TabIndex = 14;
             this.groupBoxCalculation.TabStop = false;
             this.groupBoxCalculation.Text = "Calculation";
+            // 
+            // map
+            // 
+            this.map.CurrentTool = MiniGIS.Tool.Select;
+            this.map.IsMouseDown = false;
+            this.map.Location = new System.Drawing.Point(6, 21);
+            geoPoint1.X = 0D;
+            geoPoint1.Y = 0D;
+            this.map.MapCenter = geoPoint1;
+            this.map.MapScale = 1D;
+            this.map.MouseDownPosition = new System.Drawing.Point(0, 0);
+            this.map.Name = "map";
+            this.map.Size = new System.Drawing.Size(700, 700);
+            this.map.TabIndex = 0;
+            this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapControl_MouseMove);
             // 
             // Form
             // 

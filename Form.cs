@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,6 +105,8 @@ namespace MiniGIS
             map.CurrentTool = Tool.Select;
             CurrentToolBtn = selectBtn;
             CurrentToolBtn.Checked = true;
+
+            listViewLayers.InsertionMark.Color = System.Drawing.Color.Black;
         }
 
         private void OnToolStripBtnClicked(object sender, EventArgs e)
@@ -166,6 +169,38 @@ namespace MiniGIS
                 textBoxType.Text = mapObject.Type.ToString();
                 textBoxPerimeter.Text = mapObject.Perimeter().ToString("0.0");
                 textBoxArea.Text = mapObject.Area().ToString("0.0");
+            }
+        }
+
+        private void listViewLayers_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            listViewLayers.DoDragDrop(e.Item, DragDropEffects.Move);
+        }
+
+        private void listViewLayers_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void listViewLayers_DragOver(object sender, DragEventArgs e)
+        {
+            if(listViewLayers.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            System.Drawing.Point point = listViewLayers.PointToClient(new System.Drawing.Point(e.X, e.Y));
+            ListViewItem dragItem = listViewLayers.GetItemAt(point.X, point.Y);
+            if(dragItem == null)
+            {
+                return;
+            }
+            int itemDragIndex = dragItem.Index;
+            ListViewItem selectedItem = listViewLayers.SelectedItems[0];
+            int selectedItemIndex = selectedItem.Index;
+            if(itemDragIndex != selectedItemIndex)
+            {
+                listViewLayers.Items.Remove(selectedItem);
+                listViewLayers.Items.Insert(itemDragIndex, selectedItem);
             }
         }
     }
