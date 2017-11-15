@@ -41,9 +41,9 @@ namespace MiniGIS
             map.AddLayer(layerAxis);
 
             var polygon1 = new Polygon();
-            polygon1.AddNode(new GEOPoint(50.0, -50.0));
-            polygon1.AddNode(new GEOPoint(200.0, -50.0));
-            polygon1.AddNode(new GEOPoint(50.0, -150.0));
+            polygon1.AddNode(new GEOPoint(10.0, -10.0));
+            polygon1.AddNode(new GEOPoint(200.0, -10.0));
+            polygon1.AddNode(new GEOPoint(10.0, -150.0));
 
             var polygon2 = new Polygon();
             polygon2.PolygonStyle.Color = System.Drawing.Color.Gold;

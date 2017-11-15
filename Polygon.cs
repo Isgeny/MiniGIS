@@ -51,39 +51,64 @@ namespace MiniGIS
             var bounds = GetBounds();
 
             // Проверяем полное вхождение прямоугольной области полигона в выделенную область
-            if(GEORect.IsIntersect(bounds, geoRect))
+            if(GEORect.Contains(bounds, geoRect))
             {
                 return true;
             }
 
+            // Проверяем пересечение границ выделяемой прямоугольной области с полигоном
+            int countNodes = CountNodes();
+            var rectLines = GEORect.GEORectToLines(geoRect);
+            foreach(var line in rectLines)
+            {
+                for(int i = 0; i < countNodes; ++i)
+                {
+                    var polygonLine = new Line();
+                    if(i != countNodes - 1)
+                    {
+                        polygonLine.BeginPoint = Nodes[i];
+                        polygonLine.EndPoint = Nodes[i + 1];
+                        
+                    }
+                    else
+                    {
+                        polygonLine.BeginPoint = Nodes[0];
+                        polygonLine.EndPoint = Nodes[countNodes - 1];
+                    }
+                    if(Line.IsCrossLines(line, polygonLine))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            // Проверяем когда выделяемая прямоугольная область полностью внутри полигона
             var geoRectCenter = new GEOPoint((geoRect.XMin + Math.Abs(geoRect.XMin - geoRect.XMax) / 2.0), geoRect.YMin + Math.Abs(geoRect.YMin - geoRect.YMax) / 2.0);
-            var geoPointObject = new GEOPoint(bounds.XMax + 1.0, geoRectCenter.Y);
+            var geoPointObject = new GEOPoint(bounds.XMax, geoRectCenter.Y);
 
-            var CrossLine = new Line();
-            CrossLine.BeginPoint = geoRectCenter;
-            CrossLine.EndPoint = geoPointObject;
+            var crossLine = new Line();
+            crossLine.BeginPoint = geoRectCenter;
+            crossLine.EndPoint = geoPointObject;
 
-            var count = 0;
-            for(int i = 0; i < CountNodes() - 1; ++i)
+            int count = 0;
+            for(int i = 0; i < countNodes; ++i)
             {
                 var line = new Line();
-                line.BeginPoint = Nodes[i];
-                line.EndPoint = Nodes[i + 1];
-                if(Line.IsCrossLines(CrossLine, line))
+                if(i != countNodes - 1)
+                {
+                    line.BeginPoint = Nodes[i];
+                    line.EndPoint = Nodes[i + 1];
+                }
+                else
+                {
+                    line.BeginPoint = Nodes[0];
+                    line.EndPoint = Nodes[countNodes - 1];
+                }
+                if(Line.IsCrossLines(crossLine, line))
                 {
                     count++;
                 }
             }
-            
-            //Ребро с начальной и конечной вершиной
-            var lastLine = new Line();
-            lastLine.BeginPoint = Nodes[0];
-            lastLine.EndPoint = Nodes[CountNodes() - 1];
-            if(Line.IsCrossLines(CrossLine, lastLine))
-            {
-                count++;
-            }
-
             return !(count % 2 == 0);
         }
     }
