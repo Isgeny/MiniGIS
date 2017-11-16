@@ -17,6 +17,13 @@ namespace MiniGIS
         {
             Color = color;
             Width = width;
+
+            //int c = 0xff0000;
+            //byte red = (byte)((c >> 16) & 0xff);
+            //byte green = (byte)((c >> 8) & 0xff);
+            //byte blue = (byte)(c & 0xff);
+            //Color col = Color.FromArgb(red, green, blue);
+            //Color mred = Color.Red;
         }
     }
 }

@@ -245,5 +245,18 @@ namespace MiniGIS
                 map.Refresh();
             }
         }
+
+        private void openLayerBtn_Click(object sender, EventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "MIF|*.mif";
+            fileDialog.Multiselect = true;
+            if(fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string[] filePathName = fileDialog.FileNames;
+                string[] filename = fileDialog.SafeFileNames;
+
+            }
+        }
     }
 }

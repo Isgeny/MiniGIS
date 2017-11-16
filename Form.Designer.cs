@@ -35,11 +35,6 @@
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Points");
             MiniGIS.GEOPoint geoPoint1 = new MiniGIS.GEOPoint();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.selectBtn = new System.Windows.Forms.ToolStripButton();
-            this.panBtn = new System.Windows.Forms.ToolStripButton();
-            this.zoomInBtn = new System.Windows.Forms.ToolStripButton();
-            this.zoomOutBtn = new System.Windows.Forms.ToolStripButton();
-            this.entireViewBtn = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.listViewLayers = new System.Windows.Forms.ListView();
@@ -53,6 +48,12 @@
             this.groupBoxLayers = new System.Windows.Forms.GroupBox();
             this.groupBoxMap = new System.Windows.Forms.GroupBox();
             this.groupBoxCalculation = new System.Windows.Forms.GroupBox();
+            this.selectBtn = new System.Windows.Forms.ToolStripButton();
+            this.panBtn = new System.Windows.Forms.ToolStripButton();
+            this.zoomInBtn = new System.Windows.Forms.ToolStripButton();
+            this.zoomOutBtn = new System.Windows.Forms.ToolStripButton();
+            this.entireViewBtn = new System.Windows.Forms.ToolStripButton();
+            this.openLayerBtn = new System.Windows.Forms.ToolStripButton();
             this.map = new MiniGIS.Map();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -70,62 +71,13 @@
             this.panBtn,
             this.zoomInBtn,
             this.zoomOutBtn,
-            this.entireViewBtn});
+            this.entireViewBtn,
+            this.openLayerBtn});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(132, 27);
+            this.toolStrip.Size = new System.Drawing.Size(195, 27);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
-            // 
-            // selectBtn
-            // 
-            this.selectBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.selectBtn.Image = global::MiniGIS.Properties.Resources.Select;
-            this.selectBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.selectBtn.Name = "selectBtn";
-            this.selectBtn.Size = new System.Drawing.Size(24, 24);
-            this.selectBtn.Text = "Select";
-            this.selectBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
-            // 
-            // panBtn
-            // 
-            this.panBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.panBtn.Image = global::MiniGIS.Properties.Resources.Pan;
-            this.panBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.panBtn.Name = "panBtn";
-            this.panBtn.Size = new System.Drawing.Size(24, 24);
-            this.panBtn.Text = "Pan";
-            this.panBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
-            // 
-            // zoomInBtn
-            // 
-            this.zoomInBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.zoomInBtn.Image = global::MiniGIS.Properties.Resources.ZoomIn;
-            this.zoomInBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.zoomInBtn.Name = "zoomInBtn";
-            this.zoomInBtn.Size = new System.Drawing.Size(24, 24);
-            this.zoomInBtn.Text = "ZoomIn";
-            this.zoomInBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
-            // 
-            // zoomOutBtn
-            // 
-            this.zoomOutBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.zoomOutBtn.Image = global::MiniGIS.Properties.Resources.ZoomOut;
-            this.zoomOutBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.zoomOutBtn.Name = "zoomOutBtn";
-            this.zoomOutBtn.Size = new System.Drawing.Size(24, 24);
-            this.zoomOutBtn.Text = "ZoomOut";
-            this.zoomOutBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
-            // 
-            // entireViewBtn
-            // 
-            this.entireViewBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.entireViewBtn.Image = global::MiniGIS.Properties.Resources.EntireView;
-            this.entireViewBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.entireViewBtn.Name = "entireViewBtn";
-            this.entireViewBtn.Size = new System.Drawing.Size(24, 24);
-            this.entireViewBtn.Text = "EntireView";
-            this.entireViewBtn.Click += new System.EventHandler(this.entireViewBtn_Click);
             // 
             // statusStrip1
             // 
@@ -274,6 +226,70 @@
             this.groupBoxCalculation.TabStop = false;
             this.groupBoxCalculation.Text = "Calculation";
             // 
+            // selectBtn
+            // 
+            this.selectBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.selectBtn.Image = global::MiniGIS.Properties.Resources.Select;
+            this.selectBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.selectBtn.Name = "selectBtn";
+            this.selectBtn.Size = new System.Drawing.Size(24, 24);
+            this.selectBtn.Text = "Select";
+            this.selectBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
+            // 
+            // panBtn
+            // 
+            this.panBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.panBtn.Image = global::MiniGIS.Properties.Resources.Pan;
+            this.panBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.panBtn.Name = "panBtn";
+            this.panBtn.Size = new System.Drawing.Size(24, 24);
+            this.panBtn.Text = "Pan";
+            this.panBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
+            // 
+            // zoomInBtn
+            // 
+            this.zoomInBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.zoomInBtn.Image = global::MiniGIS.Properties.Resources.ZoomIn;
+            this.zoomInBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.zoomInBtn.Name = "zoomInBtn";
+            this.zoomInBtn.Size = new System.Drawing.Size(24, 24);
+            this.zoomInBtn.Text = "ZoomIn";
+            this.zoomInBtn.ToolTipText = "Zoom In";
+            this.zoomInBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
+            // 
+            // zoomOutBtn
+            // 
+            this.zoomOutBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.zoomOutBtn.Image = global::MiniGIS.Properties.Resources.ZoomOut;
+            this.zoomOutBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.zoomOutBtn.Name = "zoomOutBtn";
+            this.zoomOutBtn.Size = new System.Drawing.Size(24, 24);
+            this.zoomOutBtn.Text = "ZoomOut";
+            this.zoomOutBtn.ToolTipText = "Zoom Out";
+            this.zoomOutBtn.Click += new System.EventHandler(this.OnToolStripBtnClicked);
+            // 
+            // entireViewBtn
+            // 
+            this.entireViewBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.entireViewBtn.Image = global::MiniGIS.Properties.Resources.EntireView;
+            this.entireViewBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.entireViewBtn.Name = "entireViewBtn";
+            this.entireViewBtn.Size = new System.Drawing.Size(24, 24);
+            this.entireViewBtn.Text = "EntireView";
+            this.entireViewBtn.ToolTipText = "Entire View";
+            this.entireViewBtn.Click += new System.EventHandler(this.entireViewBtn_Click);
+            // 
+            // openLayerBtn
+            // 
+            this.openLayerBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openLayerBtn.Image = global::MiniGIS.Properties.Resources.OpenLayer;
+            this.openLayerBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openLayerBtn.Name = "openLayerBtn";
+            this.openLayerBtn.Size = new System.Drawing.Size(24, 24);
+            this.openLayerBtn.Text = "OpenLayer";
+            this.openLayerBtn.ToolTipText = "Open Layer";
+            this.openLayerBtn.Click += new System.EventHandler(this.openLayerBtn_Click);
+            // 
             // map
             // 
             this.map.CurrentTool = MiniGIS.Tool.Select;
@@ -300,6 +316,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MiniGIS";
@@ -339,6 +356,7 @@
         private System.Windows.Forms.GroupBox groupBoxLayers;
         private System.Windows.Forms.GroupBox groupBoxMap;
         private System.Windows.Forms.GroupBox groupBoxCalculation;
+        private System.Windows.Forms.ToolStripButton openLayerBtn;
     }
 }
 
