@@ -113,6 +113,24 @@ namespace MiniGIS
             Layers[layerIndex2] = temp;
         }
 
+        public void EntireView()
+        {
+            var bounds = GEOBounds;
+            double Dx = Math.Abs(bounds.XMax - bounds.XMin);
+            double Dy = Math.Abs(bounds.YMax - bounds.YMin);
+            GEOPoint newCenter = new GEOPoint((bounds.XMin + bounds.XMax) / 2.0, (bounds.YMin + bounds.YMax) / 2.0);
+            MapCenter = newCenter;
+            if(Width / Dx < Height / Dy)
+            {
+                MapScale = Width / Dx - 0.01;
+            }
+            else
+            {
+                MapScale = Height / Dy - 0.01;
+            }
+            Refresh();
+        }
+
         private void Map_MouseDown(object sender, MouseEventArgs e)
         {
             switch(CurrentTool)

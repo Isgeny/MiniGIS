@@ -20,7 +20,7 @@ namespace MiniGIS
         public PolyLine(List<GEOPoint> nodes, LineStyle style)
         {
             Type = MapObjectType.PolyLine;
-            int nodesCount = CountNodes();
+            int nodesCount = nodes.Count;
             Nodes = new List<GEOPoint>(nodesCount);
             foreach(var node in nodes)
             {
