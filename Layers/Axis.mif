@@ -1,0 +1,10 @@
+Version 450
+Charset "Neutral"
+Delimiter ","
+Columns 1
+Comment Char (250)
+Data
+Line -350.0 0.0 350.0 0.0 Pen (1, 2, 0)
+Line 0.0 350.0 0.0 -350.0 Pen (1, 2, 0)
+Point 330.0 14.0 Symbol (88, 0, 14, "Arial", 0, 0.0)
+Point 14.0 330.0 Symbol (89, 0, 14, "Arial", 0, 0.0)

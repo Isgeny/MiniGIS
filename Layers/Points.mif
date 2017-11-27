@@ -1,0 +1,10 @@
+Version 450
+Charset "Neutral"
+Delimiter ","
+Columns 1
+Comment Char (250)
+Data
+Point 100.0 100.0 Symbol (81, 8421504, 30, "Wingdings", 0, 0.0)
+Point 300.0 200.0 Symbol (77, 0, 20, "Wingdings", 0, 0.0)
+Point 150.0 300.0 Symbol (82, 16753920, 40, "Wingdings", 0, 0.0)
+Point 0.0 -2.0 Symbol (91, 0, 25, "Wingdings", 0, 0.0)
