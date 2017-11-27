@@ -133,25 +133,11 @@ namespace MiniGIS
 
         private void Map_MouseDown(object sender, MouseEventArgs e)
         {
-            switch(CurrentTool)
+            IsMouseDown = true;
+            MouseDownPosition = e.Location;
+            if(CurrentTool == Tool.Pan)
             {
-                case Tool.Select:
-                    IsMouseDown = true;
-                    MouseDownPosition = e.Location;
-                    break;
-                case Tool.Pan:
-                    IsMouseDown = true;
-                    MouseDownPosition = e.Location;
-                    Cursor = Cursors.Hand;
-                    break;
-                case Tool.ZoomIn:
-                    IsMouseDown = true;
-                    MouseDownPosition = e.Location;
-                    break;
-                case Tool.ZoomOut:
-                    IsMouseDown = true;
-                    MouseDownPosition = e.Location;
-                    break;
+                Cursor = Cursors.Hand;
             }
         }
 

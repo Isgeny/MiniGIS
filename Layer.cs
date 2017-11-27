@@ -10,7 +10,7 @@ namespace MiniGIS
         public bool Visible { get; set; }
         public Map Map { get; set; }
 
-        // Прямоугольная область в которую вписаны все мап объекты
+        // Прямоугольная область в которую вписаны все объекты в слое
         public GEORect GEOBounds { get; set; }
 
         public Layer(string name)
