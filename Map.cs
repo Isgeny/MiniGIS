@@ -222,8 +222,8 @@ namespace MiniGIS
                             }
                             SelectedObjects.Add(result);
                         }
-                        // Если кликнули не по объекту то очищаем выделение всех объектов
-                        else
+                        // Если кликнули не по объекту и не нажата ctrl то очищаем выделение всех объектов
+                        else if(!ModifierKeys.HasFlag(Keys.Control))
                         {
                             foreach(var selectedObject in SelectedObjects)
                             {
@@ -244,15 +244,17 @@ namespace MiniGIS
                         GEORect searchRect = new GEORect(xMin, xMax, yMin, yMax);
                         var selectedObjects = FindMapObjects(searchRect);
 
-                        foreach(var selectedObject in SelectedObjects)
+                        if(!ModifierKeys.HasFlag(Keys.Control))
                         {
-                            selectedObject.Selected = false;
+                            foreach(var selectedObject in SelectedObjects)
+                            {
+                                selectedObject.Selected = false;
+                            }
+                            SelectedObjects.Clear();
                         }
-                        SelectedObjects.Clear();
-                        
                         foreach(var selectedObject in selectedObjects)
                         {
-                            selectedObject.Selected = true;
+                            selectedObject.Selected = !selectedObject.Selected;
                             SelectedObjects.Add(selectedObject);
                         }
                     }
