@@ -246,6 +246,9 @@
             // 
             // groupBoxMap
             // 
+            this.groupBoxMap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxMap.Controls.Add(this.map);
             this.groupBoxMap.Location = new System.Drawing.Point(12, 30);
             this.groupBoxMap.Name = "groupBoxMap";
@@ -272,6 +275,8 @@
             // 
             // map
             // 
+            this.map.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.map.CurrentTool = MiniGIS.Tool.Select;
             this.map.IsMouseDown = false;
             this.map.Location = new System.Drawing.Point(6, 21);
