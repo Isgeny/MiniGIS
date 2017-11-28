@@ -48,8 +48,8 @@
             this.textBoxArea = new System.Windows.Forms.TextBox();
             this.groupBoxLayers = new System.Windows.Forms.GroupBox();
             this.groupBoxMap = new System.Windows.Forms.GroupBox();
-            this.groupBoxCalculation = new System.Windows.Forms.GroupBox();
             this.map = new MiniGIS.Map();
+            this.groupBoxCalculation = new System.Windows.Forms.GroupBox();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBoxLayers.SuspendLayout();
@@ -258,23 +258,6 @@
             this.groupBoxMap.TabStop = false;
             this.groupBoxMap.Text = "Map";
             // 
-            // groupBoxCalculation
-            // 
-            this.groupBoxCalculation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxCalculation.Controls.Add(this.textBoxType);
-            this.groupBoxCalculation.Controls.Add(this.btnCalculate);
-            this.groupBoxCalculation.Controls.Add(this.lblType);
-            this.groupBoxCalculation.Controls.Add(this.textBoxArea);
-            this.groupBoxCalculation.Controls.Add(this.lblPerimeter);
-            this.groupBoxCalculation.Controls.Add(this.textBoxPerimeter);
-            this.groupBoxCalculation.Controls.Add(this.lblArea);
-            this.groupBoxCalculation.Location = new System.Drawing.Point(748, 265);
-            this.groupBoxCalculation.Name = "groupBoxCalculation";
-            this.groupBoxCalculation.Size = new System.Drawing.Size(199, 210);
-            this.groupBoxCalculation.TabIndex = 14;
-            this.groupBoxCalculation.TabStop = false;
-            this.groupBoxCalculation.Text = "Calculation";
-            // 
             // map
             // 
             this.map.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -292,7 +275,25 @@
             this.map.Name = "map";
             this.map.Size = new System.Drawing.Size(718, 596);
             this.map.TabIndex = 0;
+            this.map.KeyUp += new System.Windows.Forms.KeyEventHandler(this.map_KeyUp);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapControl_MouseMove);
+            // 
+            // groupBoxCalculation
+            // 
+            this.groupBoxCalculation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxCalculation.Controls.Add(this.textBoxType);
+            this.groupBoxCalculation.Controls.Add(this.btnCalculate);
+            this.groupBoxCalculation.Controls.Add(this.lblType);
+            this.groupBoxCalculation.Controls.Add(this.textBoxArea);
+            this.groupBoxCalculation.Controls.Add(this.lblPerimeter);
+            this.groupBoxCalculation.Controls.Add(this.textBoxPerimeter);
+            this.groupBoxCalculation.Controls.Add(this.lblArea);
+            this.groupBoxCalculation.Location = new System.Drawing.Point(748, 265);
+            this.groupBoxCalculation.Name = "groupBoxCalculation";
+            this.groupBoxCalculation.Size = new System.Drawing.Size(199, 210);
+            this.groupBoxCalculation.TabIndex = 14;
+            this.groupBoxCalculation.TabStop = false;
+            this.groupBoxCalculation.Text = "Calculation";
             // 
             // Form
             // 

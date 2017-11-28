@@ -338,5 +338,18 @@ namespace MiniGIS
             }
             return mapObjects;
         }
+
+        public void DeleteSelectedObjects()
+        {
+            foreach(var selectedObject in SelectedObjects)
+            {
+                foreach(var layer in Layers)
+                {
+                    layer.RemoveMapObject(selectedObject);
+                }
+            }
+            SelectedObjects.Clear();
+            Refresh();
+        }
     }
 }

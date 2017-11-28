@@ -118,6 +118,14 @@ namespace MiniGIS
             }
         }
 
+        private void map_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                map.DeleteSelectedObjects();
+            }
+        }
+
         private void openLayerBtn_Click(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog();
