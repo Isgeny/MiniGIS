@@ -143,9 +143,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 767);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 656);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(940, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(973, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -236,8 +236,9 @@
             // 
             // groupBoxLayers
             // 
+            this.groupBoxLayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxLayers.Controls.Add(this.listViewLayers);
-            this.groupBoxLayers.Location = new System.Drawing.Point(731, 30);
+            this.groupBoxLayers.Location = new System.Drawing.Point(748, 30);
             this.groupBoxLayers.Name = "groupBoxLayers";
             this.groupBoxLayers.Size = new System.Drawing.Size(199, 229);
             this.groupBoxLayers.TabIndex = 12;
@@ -252,13 +253,14 @@
             this.groupBoxMap.Controls.Add(this.map);
             this.groupBoxMap.Location = new System.Drawing.Point(12, 30);
             this.groupBoxMap.Name = "groupBoxMap";
-            this.groupBoxMap.Size = new System.Drawing.Size(713, 726);
+            this.groupBoxMap.Size = new System.Drawing.Size(730, 623);
             this.groupBoxMap.TabIndex = 13;
             this.groupBoxMap.TabStop = false;
             this.groupBoxMap.Text = "Map";
             // 
             // groupBoxCalculation
             // 
+            this.groupBoxCalculation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxCalculation.Controls.Add(this.textBoxType);
             this.groupBoxCalculation.Controls.Add(this.btnCalculate);
             this.groupBoxCalculation.Controls.Add(this.lblType);
@@ -266,7 +268,7 @@
             this.groupBoxCalculation.Controls.Add(this.lblPerimeter);
             this.groupBoxCalculation.Controls.Add(this.textBoxPerimeter);
             this.groupBoxCalculation.Controls.Add(this.lblArea);
-            this.groupBoxCalculation.Location = new System.Drawing.Point(731, 265);
+            this.groupBoxCalculation.Location = new System.Drawing.Point(748, 265);
             this.groupBoxCalculation.Name = "groupBoxCalculation";
             this.groupBoxCalculation.Size = new System.Drawing.Size(199, 210);
             this.groupBoxCalculation.TabIndex = 14;
@@ -275,8 +277,10 @@
             // 
             // map
             // 
-            this.map.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.map.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.map.AutoSize = true;
             this.map.CurrentTool = MiniGIS.Tool.Select;
             this.map.IsMouseDown = false;
             this.map.Location = new System.Drawing.Point(6, 21);
@@ -286,7 +290,7 @@
             this.map.MapScale = 1D;
             this.map.MouseDownPosition = new System.Drawing.Point(0, 0);
             this.map.Name = "map";
-            this.map.Size = new System.Drawing.Size(700, 700);
+            this.map.Size = new System.Drawing.Size(718, 596);
             this.map.TabIndex = 0;
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapControl_MouseMove);
             // 
@@ -294,14 +298,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(940, 792);
+            this.ClientSize = new System.Drawing.Size(973, 681);
             this.Controls.Add(this.groupBoxCalculation);
             this.Controls.Add(this.groupBoxMap);
             this.Controls.Add(this.groupBoxLayers);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MiniGIS";
@@ -312,6 +315,7 @@
             this.statusStrip1.PerformLayout();
             this.groupBoxLayers.ResumeLayout(false);
             this.groupBoxMap.ResumeLayout(false);
+            this.groupBoxMap.PerformLayout();
             this.groupBoxCalculation.ResumeLayout(false);
             this.groupBoxCalculation.PerformLayout();
             this.ResumeLayout(false);

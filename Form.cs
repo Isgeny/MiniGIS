@@ -32,7 +32,7 @@ namespace MiniGIS
 
         private void Form_Resize(object sender, EventArgs e)
         {
-            Refresh();
+            map.EntireView();
         }
 
         private void mapControl_MouseMove(object sender, MouseEventArgs e)
@@ -55,7 +55,7 @@ namespace MiniGIS
             textBoxType.Text = "";
             textBoxPerimeter.Text = "";
             textBoxArea.Text = "";
-
+            
             var selectedObjects = map.SelectedObjects;
             if(selectedObjects.Count == 1)
             {

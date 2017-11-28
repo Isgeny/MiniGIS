@@ -84,7 +84,7 @@ namespace MiniGIS
 
             // Проверяем когда выделяемая прямоугольная область полностью внутри полигона
             var geoRectCenter = new GEOPoint((geoRect.XMin + Math.Abs(geoRect.XMin - geoRect.XMax) / 2.0), geoRect.YMin + Math.Abs(geoRect.YMin - geoRect.YMax) / 2.0);
-            var geoPointObject = new GEOPoint(bounds.XMax, geoRectCenter.Y);
+            var geoPointObject = new GEOPoint(bounds.XMax + 0.01, geoRectCenter.Y);
 
             var crossLine = new Line();
             crossLine.BeginPoint = geoRectCenter;
