@@ -106,13 +106,6 @@ namespace MiniGIS
             return Layers.Count;
         }
 
-        public void SwapLayers(int layerIndex1, int layerIndex2)
-        {
-            Layer temp = Layers[layerIndex1];
-            Layers[layerIndex1] = Layers[layerIndex2];
-            Layers[layerIndex2] = temp;
-        }
-
         public void EntireView()
         {
             var bounds = GEOBounds;

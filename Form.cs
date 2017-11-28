@@ -94,7 +94,9 @@ namespace MiniGIS
             if(itemDragIndex != selectedItemIndex)
             {
                 listViewLayers.Items.Remove(selectedItem);
-                map.SwapLayers(itemDragIndex, selectedItemIndex);
+                Layer selectedLayer = map.Layers[selectedItemIndex];
+                map.RemoveLayer(selectedItemIndex);
+                map.InsertLayer(itemDragIndex, selectedLayer);
                 listViewLayers.Items.Insert(itemDragIndex, selectedItem);
             }
             map.Refresh();
