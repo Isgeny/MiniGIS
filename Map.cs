@@ -301,7 +301,7 @@ namespace MiniGIS
 
         private MapObject FindObject(GEORect searchRect)
         {
-            for(int i = Layers.Count - 1; i >= 0; --i)
+            for(int i = 0; i < CountLayers(); ++i)
             {
                 var layer = Layers[i];
                 if(layer.Visible)
@@ -319,7 +319,7 @@ namespace MiniGIS
         private List<MapObject> FindMapObjects(GEORect searchRect)
         {
             var mapObjects = new List<MapObject>();
-            for(int i = Layers.Count - 1; i >= 0; --i)
+            for(int i = 0; i < CountLayers(); ++i)
             {
                 var layer = Layers[i];
                 if(layer.Visible)
